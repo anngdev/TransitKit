@@ -17,6 +17,10 @@ protocol AnimationLine: Line {
     func animatePassenger(view: UIView, targetFrame: CGRect, direction: Direction)
 }
 
-protocol CADisplayLinkLine: Line {
-    
+protocol ProgressLine: Line {
+    func progress(fromView: UIView, toView: UIView, inView: UIView, direction: Direction, progress: Float)
+    func progressPassenger(view: UIView, fromFrame: CGRect, toFrame: CGRect, direction: Direction, progress: Float)
+}
+
+protocol InteractionLine: ProgressLine {
 }

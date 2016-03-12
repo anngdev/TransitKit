@@ -12,19 +12,20 @@ typealias Station = UIViewController
 
 extension UIViewController {
     
-    func travelBy(line: Line, to: Station, with: [Passenger] = []) {
+    func travelBy(line: Line, to: Station, with: [Passenger] = []) -> Transit {
         let train = Train(from: self, to: to, passengers: with)
         let transit = Transit(line: line, train: train, direction: .Go)
-        
         to.transitioningDelegate = transit
         presentViewController(to, animated: true, completion: nil)
+        return transit
     }
     
-    func travelBackBy(line: Line, with: [Passenger] = []) {
+    func travelBackBy(line: Line, with: [Passenger] = []) -> Transit {
         let train = Train(from: self, to: presentingViewController!, passengers: with)
         let transit = Transit(line: line, train: train, direction: .Return)
         transitioningDelegate = transit
         dismissViewControllerAnimated(true, completion: nil)
+        return transit
     }
 }
 

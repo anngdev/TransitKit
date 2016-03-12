@@ -13,7 +13,7 @@ class ModalViewController: UIViewController, StationPassenger {
     @IBOutlet weak var orangeView: UIView!
     
     @IBAction func buttonPressed(sender: AnyObject) {
-        travelBackBy(SlideInZoomOut(), with: allPassengers())
+        travelBackBy(SlideInZoomOutProgress(), with: allPassengers())
     }
     
     override func viewDidAppear(animated: Bool) {

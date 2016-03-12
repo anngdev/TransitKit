@@ -18,7 +18,8 @@
 		DC49B7A01C8A01A400A98382 /* Transit.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC49B79F1C8A01A400A98382 /* Transit.swift */; };
 		DC8889651C8ADFAD00C0A358 /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8889641C8ADFAD00C0A358 /* Line.swift */; };
 		DC93099C1C8AFEE6000606C2 /* ModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC93099B1C8AFEE6000606C2 /* ModalViewController.swift */; };
-		DC93099F1C8B0116000606C2 /* SlideInZoomOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC93099E1C8B0116000606C2 /* SlideInZoomOut.swift */; };
+		DC93099F1C8B0116000606C2 /* SlideInZoomOutAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC93099E1C8B0116000606C2 /* SlideInZoomOutAnimation.swift */; };
+		DCCEBA011C94209600CA1D3C /* SlideInZoomOutProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCCEBA001C94209600CA1D3C /* SlideInZoomOutProgress.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,7 +36,8 @@
 		DC49B79F1C8A01A400A98382 /* Transit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transit.swift; sourceTree = "<group>"; };
 		DC8889641C8ADFAD00C0A358 /* Line.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Line.swift; sourceTree = "<group>"; };
 		DC93099B1C8AFEE6000606C2 /* ModalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModalViewController.swift; sourceTree = "<group>"; };
-		DC93099E1C8B0116000606C2 /* SlideInZoomOut.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideInZoomOut.swift; sourceTree = "<group>"; };
+		DC93099E1C8B0116000606C2 /* SlideInZoomOutAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideInZoomOutAnimation.swift; sourceTree = "<group>"; };
+		DCCEBA001C94209600CA1D3C /* SlideInZoomOutProgress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideInZoomOutProgress.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,7 +98,8 @@
 		DC93099D1C8B004A000606C2 /* Lines */ = {
 			isa = PBXGroup;
 			children = (
-				DC93099E1C8B0116000606C2 /* SlideInZoomOut.swift */,
+				DC93099E1C8B0116000606C2 /* SlideInZoomOutAnimation.swift */,
+				DCCEBA001C94209600CA1D3C /* SlideInZoomOutProgress.swift */,
 			);
 			path = Lines;
 			sourceTree = "<group>";
@@ -133,6 +136,7 @@
 				TargetAttributes = {
 					DC49B7821C89E49200A98382 = {
 						CreatedOnToolsVersion = 7.2.1;
+						DevelopmentTeam = N6V2CV23BU;
 					};
 				};
 			};
@@ -173,10 +177,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				DC93099C1C8AFEE6000606C2 /* ModalViewController.swift in Sources */,
-				DC93099F1C8B0116000606C2 /* SlideInZoomOut.swift in Sources */,
+				DC93099F1C8B0116000606C2 /* SlideInZoomOutAnimation.swift in Sources */,
 				DC49B79C1C89EC8100A98382 /* Train.swift in Sources */,
 				DC49B7891C89E49200A98382 /* ViewController.swift in Sources */,
 				DC49B79E1C89ED5600A98382 /* Passenger.swift in Sources */,
+				DCCEBA011C94209600CA1D3C /* SlideInZoomOutProgress.swift in Sources */,
 				DC49B7A01C8A01A400A98382 /* Transit.swift in Sources */,
 				DC49B79A1C89E55300A98382 /* Station.swift in Sources */,
 				DC8889651C8ADFAD00C0A358 /* Line.swift in Sources */,
@@ -293,11 +298,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Transit/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.zoonref.Transit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -305,11 +313,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Transit/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.zoonref.Transit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

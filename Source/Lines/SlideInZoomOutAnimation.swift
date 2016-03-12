@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct SlideInZoomOut: AnimationLine {
+struct SlideInZoomOutAnimation: AnimationLine {
     
     func duration() -> NSTimeInterval {
         return 0.5
