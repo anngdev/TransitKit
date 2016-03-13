@@ -26,7 +26,34 @@ class ModalViewController: UIViewController, StationPassenger {
         NSLog("Modal viewDidDisappear")
     }
     
+    override func viewDidLoad() {
+        let panGesture = UIPanGestureRecognizer(target: self, action: "handlePan:")
+        view.addGestureRecognizer(panGesture)
+    }
+    
     func allPassengers() -> [Passenger] {
         return [Passenger(name: "orange", view: orangeView)]
+    }
+    
+    private var transit: Transit?
+    private var panStart: CGFloat = 0
+    
+    func handlePan(sender: UIPanGestureRecognizer) {
+        let location = sender.locationInView(view.window)
+        let velocity = sender.velocityInView(view)
+        
+        if sender.state == .Began {
+            panStart = location.x
+            transit = travelBackBy(SlideInZoomOutInteraction())
+        } else if sender.state == .Changed {
+            let percentage = (location.x - panStart) / CGRectGetWidth(view.bounds)
+            transit?.updateInteractLine(percentage)
+        } else if sender.state == .Ended {
+            if velocity.x > 100 {
+                transit?.finishInteractionLine()
+            } else {
+                transit?.cancelInteractionLine()
+            }
+        }
     }
 }

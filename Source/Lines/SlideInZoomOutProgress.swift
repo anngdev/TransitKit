@@ -14,10 +14,10 @@ struct SlideInZoomOutProgress: ProgressLine {
         return 0.5
     }
     
-    func progress(fromView: UIView, toView: UIView, inView: UIView, direction: Direction, progress: Float) {
+    func progress(fromView: UIView, toView: UIView, inView: UIView, direction: Direction, progress: CGFloat) {
         if direction == .Go {
-            let scale = CGFloat(1 - (0.1 * progress))
-            let x = inView.frame.width - inView.frame.width * CGFloat(progress)
+            let scale = 1 - (0.1 * progress)
+            let x = inView.frame.width - inView.frame.width * progress
             fromView.transform = CGAffineTransformMakeScale(scale, scale)
             toView.frame = CGRectMake(x, 0, toView.frame.size.width, toView.frame.size.height)
             
@@ -28,16 +28,16 @@ struct SlideInZoomOutProgress: ProgressLine {
             if progress == 0 {
                 toView.transform = CGAffineTransformMakeScale(0.9, 0.9)
             }
-            let scale = CGFloat(0.9 + (0.1 * progress))
-            let x = inView.frame.width * CGFloat(progress)
+            let scale = 0.9 + (0.1 * progress)
+            let x = inView.frame.width * progress
             toView.transform = CGAffineTransformMakeScale(scale, scale)
             fromView.frame = CGRectMake(x, 0, fromView.frame.size.width, fromView.frame.size.height)
         }
     }
     
-    func progressPassenger(view: UIView, fromFrame: CGRect, toFrame: CGRect, direction: Direction, progress: Float) {
-        func translate(progress: Float, value: CGFloat, target: CGFloat) -> CGFloat {
-            return value + (target - value) * CGFloat(progress)
+    func progressPassenger(view: UIView, fromFrame: CGRect, toFrame: CGRect, direction: Direction, progress: CGFloat) {
+        func translate(progress: CGFloat, value: CGFloat, target: CGFloat) -> CGFloat {
+            return value + (target - value) * progress
         }
         
         var frame = fromFrame

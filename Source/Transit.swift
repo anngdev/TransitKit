@@ -23,6 +23,8 @@ public class Transit: UIPercentDrivenInteractiveTransition {
     private var displayLink: CADisplayLink?
     private var displayLinkLastTime: NSTimeInterval = 0
     
+    private var lastInteractionProgress: CGFloat = 0.0
+    
     init(line: Line, train: Train, direction: Direction) {
         self.line = line
         self.train = train
@@ -87,43 +89,6 @@ extension Transit: UIViewControllerAnimatedTransitioning {
             progress(progressLine, direction: direction, toStation: co.toVC,
                 fromView: co.fromView, toView: co.toView, inView: co.container, context: transitionContext)
         }
-    }
-    
-}
-
-extension Transit { // : UIPercentDrivenInteractiveTransition
-    
-    public override func startInteractiveTransition(transitionContext: UIViewControllerContextTransitioning) {
-        tempContext = transitionContext
-        
-    }
-    
-    public override func updateInteractiveTransition(percentComplete: CGFloat) {
-        if let context = tempContext {
-            let co = ContextObjects(context: context)
-            // progress line
-        }
-        
-    }
-    
-    public override func finishInteractiveTransition() {
-        tempContext?.finishInteractiveTransition()
-        endInteraction(true)
-    }
-    
-    public override func cancelInteractiveTransition() {
-        tempContext?.cancelInteractiveTransition()
-        endInteraction(false)
-    }
-    
-    private func endInteraction(finish: Bool) {
-        if let context = tempContext {
-            let co = ContextObjects(context: context)
-            let direction = finish ? self.direction : self.direction == .Go ? .Return : .Go
-            
-            // pregress line
-        }
-        tempContext = nil
     }
 }
 
@@ -196,7 +161,7 @@ extension Transit {
     }
     
     func progressPassenger(passengers: [Passenger], toStation: StationPassenger, byLine: ProgressLine,
-        fromView: UIView, toView: UIView, inView: UIView, progress: Float)
+        fromView: UIView, toView: UIView, inView: UIView, progress: CGFloat)
     {
         for (index, passenger) in passengers.enumerate() {
             let toPassenger = toStation.passengerByName(passenger.name)
@@ -230,7 +195,7 @@ extension Transit {
         }
     }
     
-    private func performProgress(progress: Float, context: ContextObjects) {
+    private func performProgress(progress: CGFloat, context: ContextObjects) {
         if let progressLine = line as? ProgressLine {
             progressLine.progress(context.fromView, toView: context.toView, inView: context.container,
                 direction: direction, progress: progress)
@@ -252,7 +217,7 @@ extension Transit {
         let timeUsed = timestamp - displayLinkLastTime
         let timeRemaining = max(line.duration() - timeUsed, 0)
         if timeRemaining > 0 {
-            let progress = Float(timeUsed / line.duration())
+            let progress = CGFloat(timeUsed / line.duration())
             if let context = tempContext {
                 let co = ContextObjects(context: context)
                 performProgress(progress, context: co)
@@ -274,16 +239,56 @@ extension Transit {
 
 extension Transit {
     
-    public func updateInteractLine(percentComplete: Float) {
-        updateInteractiveTransition(CGFloat(percentComplete))
+    public func updateInteractLine(percentComplete: CGFloat) {
+        lastInteractionProgress = percentComplete
+        if let context = tempContext {
+            let co = ContextObjects(context: context)
+            if let interactionLine = line as? InteractionLine {
+                interactionLine.interact(co.fromView, toView: co.toView, inView: co.container,
+                    progress: percentComplete)
+            }
+        }
     }
     
-    public func finishInteractionLine() {
-        finishInteractiveTransition()
+    public func finishInteractionLine(withVelocity v: CGPoint? = nil) {
+        tempContext?.finishInteractiveTransition()
+        endInteraction(true, withVelocity: v)
     }
     
-    public func cancelInteractionLine() {
-        cancelInteractiveTransition()
+    public func cancelInteractionLine(withVelocity v: CGPoint? = nil) {
+        tempContext?.cancelInteractiveTransition()
+        endInteraction(false, withVelocity: v)
+    }
+    
+    private func endInteraction(finish: Bool, withVelocity: CGPoint?) {
+        guard let context = tempContext else { return }
+        guard let interactionLine = line as? InteractionLine else { return }
+        
+        let co = ContextObjects(context: context)
+        var duration: NSTimeInterval = 0
+        if finish {
+            duration = interactionLine.interactFinish(co.fromView, toView: co.toView, inView: co.container,
+                lastProgress: lastInteractionProgress, velocity: withVelocity)
+        } else {
+            duration = interactionLine.interactCancel(co.fromView, toView: co.toView, inView: co.container,
+                lastProgress: lastInteractionProgress, velocity: withVelocity)
+        }
+        
+        after(duration) {
+            self.tempContext?.completeTransition(finish)
+            self.tempContext = nil
+        }
+    }
+}
+
+extension Transit { // : UIPercentDrivenInteractiveTransition
+    
+    public override func startInteractiveTransition(transitionContext: UIViewControllerContextTransitioning) {
+        tempContext = transitionContext
+        let co = ContextObjects(context: transitionContext)
+        co.toView.frame = transitionContext.finalFrameForViewController(co.toVC)
+        co.container.addSubview(co.toView)
+        co.container.bringSubviewToFront(co.fromView)
     }
 }
 

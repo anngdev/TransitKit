@@ -18,9 +18,14 @@ protocol AnimationLine: Line {
 }
 
 protocol ProgressLine: Line {
-    func progress(fromView: UIView, toView: UIView, inView: UIView, direction: Direction, progress: Float)
-    func progressPassenger(view: UIView, fromFrame: CGRect, toFrame: CGRect, direction: Direction, progress: Float)
+    func progress(fromView: UIView, toView: UIView, inView: UIView, direction: Direction, progress: CGFloat)
+    func progressPassenger(view: UIView, fromFrame: CGRect, toFrame: CGRect, direction: Direction, progress: CGFloat)
 }
 
-protocol InteractionLine: ProgressLine {
+protocol InteractionLine: Line {
+    func interact(fromView: UIView, toView: UIView, inView: UIView, progress: CGFloat)
+    func interactFinish(fromView: UIView, toView: UIView, inView: UIView,
+        lastProgress: CGFloat, velocity: CGPoint?) -> NSTimeInterval
+    func interactCancel(fromView: UIView, toView: UIView, inView: UIView,
+        lastProgress: CGFloat, velocity: CGPoint?) -> NSTimeInterval
 }

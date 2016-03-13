@@ -20,6 +20,7 @@
 		DC93099C1C8AFEE6000606C2 /* ModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC93099B1C8AFEE6000606C2 /* ModalViewController.swift */; };
 		DC93099F1C8B0116000606C2 /* SlideInZoomOutAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC93099E1C8B0116000606C2 /* SlideInZoomOutAnimation.swift */; };
 		DCCEBA011C94209600CA1D3C /* SlideInZoomOutProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCCEBA001C94209600CA1D3C /* SlideInZoomOutProgress.swift */; };
+		DCEC2DD91C95965800DF781B /* SlideInZoomOutInteraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEC2DD81C95965800DF781B /* SlideInZoomOutInteraction.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		DC93099B1C8AFEE6000606C2 /* ModalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModalViewController.swift; sourceTree = "<group>"; };
 		DC93099E1C8B0116000606C2 /* SlideInZoomOutAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideInZoomOutAnimation.swift; sourceTree = "<group>"; };
 		DCCEBA001C94209600CA1D3C /* SlideInZoomOutProgress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideInZoomOutProgress.swift; sourceTree = "<group>"; };
+		DCEC2DD81C95965800DF781B /* SlideInZoomOutInteraction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideInZoomOutInteraction.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +102,7 @@
 			children = (
 				DC93099E1C8B0116000606C2 /* SlideInZoomOutAnimation.swift */,
 				DCCEBA001C94209600CA1D3C /* SlideInZoomOutProgress.swift */,
+				DCEC2DD81C95965800DF781B /* SlideInZoomOutInteraction.swift */,
 			);
 			path = Lines;
 			sourceTree = "<group>";
@@ -178,6 +181,7 @@
 			files = (
 				DC93099C1C8AFEE6000606C2 /* ModalViewController.swift in Sources */,
 				DC93099F1C8B0116000606C2 /* SlideInZoomOutAnimation.swift in Sources */,
+				DCEC2DD91C95965800DF781B /* SlideInZoomOutInteraction.swift in Sources */,
 				DC49B79C1C89EC8100A98382 /* Train.swift in Sources */,
 				DC49B7891C89E49200A98382 /* ViewController.swift in Sources */,
 				DC49B79E1C89ED5600A98382 /* Passenger.swift in Sources */,
