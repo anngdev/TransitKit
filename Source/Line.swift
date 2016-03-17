@@ -28,4 +28,8 @@ protocol InteractionLine: Line {
         lastProgress: CGFloat, velocity: CGPoint?) -> NSTimeInterval
     func interactCancel(fromView: UIView, toView: UIView, inView: UIView,
         lastProgress: CGFloat, velocity: CGPoint?) -> NSTimeInterval
+    
+    func interactPassenger(view: UIView, fromFrame: CGRect, toFrame: CGRect, progress: CGFloat)
+    func interactPassengerFinish(view: UIView, toFrame: CGRect, duration: NSTimeInterval)
+    func interactPassengerCancel(view: UIView, toFrame: CGRect, duration: NSTimeInterval)
 }

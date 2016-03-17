@@ -50,4 +50,31 @@ struct SlideInZoomOutInteraction: InteractionLine {
         })
         return d
     }
+    
+    // passenger
+    
+    func interactPassenger(view: UIView, fromFrame: CGRect, toFrame: CGRect, progress: CGFloat) {
+        func translate(progress: CGFloat, value: CGFloat, target: CGFloat) -> CGFloat {
+            return value + (target - value) * progress
+        }
+        
+        var frame = fromFrame
+        frame.origin.x = translate(progress, value: frame.origin.x, target: toFrame.origin.x)
+        frame.origin.y = translate(progress, value: frame.origin.y, target: toFrame.origin.y)
+        frame.size.width = translate(progress, value: frame.size.width, target: toFrame.size.width)
+        frame.size.height = translate(progress, value: frame.size.height, target: toFrame.size.height)
+        view.frame = frame
+    }
+    
+    func interactPassengerCancel(view: UIView, toFrame: CGRect, duration: NSTimeInterval) {
+        UIView.animateWithDuration(duration) {
+            view.frame = toFrame
+        }
+    }
+    
+    func interactPassengerFinish(view: UIView, toFrame: CGRect, duration: NSTimeInterval) {
+        UIView.animateWithDuration(duration) {
+            view.frame = toFrame
+        }
+    }
 }

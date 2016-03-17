@@ -14,6 +14,8 @@ enum Direction {
 
 public class Transit: UIPercentDrivenInteractiveTransition {
     
+    private let viewTagOffset = 1000
+    
     var direction: Direction
     var line: Line
     var train: Train
@@ -160,41 +162,6 @@ extension Transit {
         self.displayLink = displayLink
     }
     
-    func progressPassenger(passengers: [Passenger], toStation: StationPassenger, byLine: ProgressLine,
-        fromView: UIView, toView: UIView, inView: UIView, progress: CGFloat)
-    {
-        for (index, passenger) in passengers.enumerate() {
-            let toPassenger = toStation.passengerByName(passenger.name)
-            
-            guard let p = toPassenger else { return }
-            
-            let targetView = p.view
-            let currentView = passenger.view
-            let currentFrame = currentView.superview!.convertRect(currentView.frame, toView: fromView)
-            var animateView = inView.viewWithTag(1000 + index)
-            
-            if animateView == nil {
-                animateView = currentView.snapshotViewAfterScreenUpdates(false)
-                animateView?.frame = currentFrame
-                animateView?.tag = 1000 + index
-                inView.addSubview(animateView!)
-                
-                currentView.hidden = true
-                targetView.hidden = true
-            }
-            
-            let targetFrame = targetView.superview!.convertRect(targetView.frame, toView: toView)
-            byLine.progressPassenger(animateView!, fromFrame: currentFrame, toFrame: targetFrame,
-                direction: direction, progress: progress)
-            
-            if progress == 1 {
-                currentView.hidden = false
-                targetView.hidden = false
-                animateView?.removeFromSuperview()
-            }
-        }
-    }
-    
     private func performProgress(progress: CGFloat, context: ContextObjects) {
         if let progressLine = line as? ProgressLine {
             progressLine.progress(context.fromView, toView: context.toView, inView: context.container,
@@ -202,7 +169,7 @@ extension Transit {
             
             // passengers
             if let station = train.toStation as? StationPassenger {
-                progressPassenger(train.passengers, toStation: station, byLine: progressLine,
+                moveAllPassengers(train.passengers, toStation: station, byLine: progressLine,
                     fromView: context.fromView, toView: context.toView, inView: context.container, progress: progress)
             }
         }
@@ -246,6 +213,11 @@ extension Transit {
             if let interactionLine = line as? InteractionLine {
                 interactionLine.interact(co.fromView, toView: co.toView, inView: co.container,
                     progress: percentComplete)
+                
+                if let station = train.toStation as? StationPassenger {
+                    moveAllPassengers(train.passengers, toStation: station, byLine: interactionLine,
+                        fromView: co.fromView, toView: co.toView, inView: co.container, progress: percentComplete)
+                }
             }
         }
     }
@@ -274,6 +246,11 @@ extension Transit {
                 lastProgress: lastInteractionProgress, velocity: withVelocity)
         }
         
+        if let station = train.toStation as? StationPassenger {
+            finishMoveAllPassengers(train.passengers, toStation: station, byLine: interactionLine,
+                fromView: co.fromView, toView: co.toView, inView: co.container, duration: duration, finish: finish)
+        }
+        
         after(duration) {
             self.tempContext?.completeTransition(finish)
             self.tempContext = nil
@@ -281,7 +258,84 @@ extension Transit {
     }
 }
 
-extension Transit { // : UIPercentDrivenInteractiveTransition
+// MARK: - Passengers
+
+extension Transit {
+    
+    // for progress and interactive
+    private func moveAllPassengers(passengers: [Passenger], toStation: StationPassenger, byLine: Line,
+        fromView: UIView, toView: UIView, inView: UIView, progress: CGFloat)
+    {
+        guard byLine is ProgressLine || byLine is InteractionLine else { return }
+        
+        for (index, passenger) in passengers.enumerate() {
+            let toPassenger = toStation.passengerByName(passenger.name)
+            
+            guard let p = toPassenger else { return }
+            
+            let targetView = p.view
+            let currentView = passenger.view
+            let currentFrame = currentView.superview!.convertRect(currentView.frame, toView: fromView)
+            var animateView = inView.viewWithTag(viewTagOffset + index)
+            
+            if animateView == nil {
+                animateView = currentView.snapshotViewAfterScreenUpdates(false)
+                animateView?.frame = currentFrame
+                animateView?.tag = viewTagOffset + index
+                inView.addSubview(animateView!)
+                
+                currentView.hidden = true
+                targetView.hidden = true
+            }
+            
+            let targetFrame = targetView.superview!.convertRect(targetView.frame, toView: toView)
+            
+            if let l = byLine as? ProgressLine {
+                l.progressPassenger(animateView!, fromFrame: currentFrame, toFrame: targetFrame, direction: direction,
+                    progress: progress)
+                
+                if progress == 1 {
+                    currentView.hidden = false
+                    targetView.hidden = false
+                    animateView?.removeFromSuperview()
+                }
+            } else if let l = byLine as? InteractionLine {
+                l.interactPassenger(animateView!, fromFrame: currentFrame, toFrame: targetFrame, progress: progress)
+            }
+        }
+    }
+    
+    private func finishMoveAllPassengers(passengers: [Passenger], toStation: StationPassenger, byLine: InteractionLine,
+        fromView: UIView, toView: UIView, inView: UIView, duration: NSTimeInterval, finish: Bool)
+    {
+        for (index, passenger) in passengers.enumerate() {
+            let toPassenger = toStation.passengerByName(passenger.name)
+            
+            guard let p = toPassenger else { return }
+            guard let animateView = inView.viewWithTag(viewTagOffset + index) else { continue }
+            
+            let currentView = passenger.view
+            let targetView = p.view
+            let targetFrame = targetView.superview!.convertRect(targetView.frame, toView: toView)
+            
+            if finish {
+                byLine.interactPassengerFinish(animateView, toFrame: targetFrame, duration: duration)
+            } else {
+                byLine.interactPassengerCancel(animateView, toFrame: currentView.frame, duration: duration)
+            }
+            
+            after(duration) {
+                currentView.hidden = false
+                targetView.hidden = false
+                animateView.removeFromSuperview()
+            }
+        }
+    }
+}
+
+// MARK: - UIPercentDrivenInteractiveTransition
+
+extension Transit {
     
     public override func startInteractiveTransition(transitionContext: UIViewControllerContextTransitioning) {
         tempContext = transitionContext

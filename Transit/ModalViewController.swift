@@ -44,7 +44,7 @@ class ModalViewController: UIViewController, StationPassenger {
         
         if sender.state == .Began {
             panStart = location.x
-            transit = travelBackBy(SlideInZoomOutInteraction())
+            transit = travelBackBy(SlideInZoomOutInteraction(), with: allPassengers())
         } else if sender.state == .Changed {
             let percentage = (location.x - panStart) / CGRectGetWidth(view.bounds)
             transit?.updateInteractLine(percentage)
