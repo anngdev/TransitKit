@@ -10,8 +10,7 @@ import UIKit
 
 typealias Station = UIViewController
 
-extension UIViewController {
-    
+extension UIViewController {  
     func travelBy(line: Line, to: Station, with: [Passenger] = []) -> Transit {
         let train = Train(from: self, to: to, passengers: with)
         let transit = Transit(line: line, train: train, direction: .Go)
@@ -19,7 +18,7 @@ extension UIViewController {
         presentViewController(to, animated: true, completion: nil)
         return transit
     }
-    
+
     func travelBackBy(line: Line, with: [Passenger] = []) -> Transit {
         let train = Train(from: self, to: presentingViewController!, passengers: with)
         let transit = Transit(line: line, train: train, direction: .Return)
@@ -37,11 +36,6 @@ protocol StationPassenger {
 
 extension StationPassenger {
     func passengerByName(name: String) -> Passenger? {
-        for passenger in allPassengers() {
-            if passenger.name == name {
-                return passenger
-            }
-        }
-        return nil
+        return allPassengers().filter({ $0.name == name}).first
     }
 }

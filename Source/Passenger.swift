@@ -9,8 +9,6 @@
 import UIKit
 
 struct Passenger {
-    
     var name: String
     var view: UIView
-    
 }
