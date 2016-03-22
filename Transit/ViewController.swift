@@ -34,7 +34,7 @@ class ViewController: UIViewController, StationPassenger {
 
     @IBAction func buttonPressed(sender: AnyObject) {
         let modal = storyboard!.instantiateViewControllerWithIdentifier("ModalViewController")
-        travelBy(SlideInZoomOutProgress(), to: modal, with: allPassengers())
+        travelPushBy(SlideInZoomOutAnimation(), to: modal)
     }
     
     func allPassengers() -> [Passenger] {

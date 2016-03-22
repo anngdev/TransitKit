@@ -16,9 +16,9 @@ public class Transit: UIPercentDrivenInteractiveTransition {
     
     private let viewTagOffset = 1000
     
-    var direction: Direction
     var line: Line
-    var train: Train
+    var train: Train?
+    var direction: Direction = .Go
     
     private var tempContext: UIViewControllerContextTransitioning?
     
@@ -27,10 +27,8 @@ public class Transit: UIPercentDrivenInteractiveTransition {
     
     private var lastInteractionProgress: CGFloat = 0.0
     
-    init(line: Line, train: Train, direction: Direction) {
+    init(line: Line) {
         self.line = line
-        self.train = train
-        self.direction = direction
     }
 }
 
@@ -41,12 +39,16 @@ extension Transit: UIViewControllerTransitioningDelegate {
         presentingController presenting: UIViewController,
         sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning?
     {
+        direction = .Go
+        train = Train(from: source, to: presented)
         return self
     }
     
     public func animationControllerForDismissedController(dismissed: UIViewController)
         -> UIViewControllerAnimatedTransitioning?
     {
+        direction = .Return
+        train = Train(from: dismissed, to: dismissed.presentingViewController!)
         return self
     }
     
@@ -57,6 +59,26 @@ extension Transit: UIViewControllerTransitioningDelegate {
     }
     
     public func interactionControllerForDismissal(animator: UIViewControllerAnimatedTransitioning)
+        -> UIViewControllerInteractiveTransitioning?
+    {
+        return line is InteractionLine ? self : nil
+    }
+}
+
+extension Transit: UINavigationControllerDelegate {
+    
+    public func navigationController(navigationController: UINavigationController,
+        animationControllerForOperation operation: UINavigationControllerOperation,
+        fromViewController fromVC: UIViewController,
+        toViewController toVC: UIViewController) -> UIViewControllerAnimatedTransitioning?
+    {
+        direction = operation == .Pop ? .Return : .Go
+        train = Train(from: fromVC, to: toVC)
+        return operation == .None ? nil : self
+    }
+    
+    public func navigationController(navigationController: UINavigationController,
+        interactionControllerForAnimationController animationController: UIViewControllerAnimatedTransitioning)
         -> UIViewControllerInteractiveTransitioning?
     {
         return line is InteractionLine ? self : nil
@@ -108,7 +130,7 @@ extension Transit {
         
         // passengers
         if let station = toStation as? StationPassenger {
-            animatePassenger(train.passengers, toStation: station, byLine: line,
+            animatePassenger(train!.passengers, toStation: station, byLine: line,
                 fromView: fromView, toView: toView, inView: inView)
         }
     }
@@ -168,8 +190,8 @@ extension Transit {
                 direction: direction, progress: progress)
             
             // passengers
-            if let station = train.toStation as? StationPassenger {
-                moveAllPassengers(train.passengers, toStation: station, byLine: progressLine,
+            if let station = train!.toStation as? StationPassenger {
+                moveAllPassengers(train!.passengers, toStation: station, byLine: progressLine,
                     fromView: context.fromView, toView: context.toView, inView: context.container, progress: progress)
             }
         }
@@ -214,8 +236,8 @@ extension Transit {
                 interactionLine.interact(co.fromView, toView: co.toView, inView: co.container,
                     progress: percentComplete)
                 
-                if let station = train.toStation as? StationPassenger {
-                    moveAllPassengers(train.passengers, toStation: station, byLine: interactionLine,
+                if let station = train!.toStation as? StationPassenger {
+                    moveAllPassengers(train!.passengers, toStation: station, byLine: interactionLine,
                         fromView: co.fromView, toView: co.toView, inView: co.container, progress: percentComplete)
                 }
             }
@@ -223,12 +245,12 @@ extension Transit {
     }
     
     public func finishInteractionLine(withVelocity v: CGPoint? = nil) {
-        tempContext?.finishInteractiveTransition()
+        finishInteractiveTransition()
         endInteraction(true, withVelocity: v)
     }
     
     public func cancelInteractionLine(withVelocity v: CGPoint? = nil) {
-        tempContext?.cancelInteractiveTransition()
+        cancelInteractiveTransition()
         endInteraction(false, withVelocity: v)
     }
     
@@ -246,8 +268,8 @@ extension Transit {
                 lastProgress: lastInteractionProgress, velocity: withVelocity)
         }
         
-        if let station = train.toStation as? StationPassenger {
-            finishMoveAllPassengers(train.passengers, toStation: station, byLine: interactionLine,
+        if let station = train!.toStation as? StationPassenger {
+            finishMoveAllPassengers(train!.passengers, toStation: station, byLine: interactionLine,
                 fromView: co.fromView, toView: co.toView, inView: co.container, duration: duration, finish: finish)
         }
         

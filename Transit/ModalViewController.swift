@@ -13,7 +13,10 @@ class ModalViewController: UIViewController, StationPassenger {
     @IBOutlet weak var orangeView: UIView!
     
     @IBAction func buttonPressed(sender: AnyObject) {
-        travelBackBy(SlideInZoomOutProgress(), with: allPassengers())
+        //travelBackBy(SlideInZoomOutProgress(), with: allPassengers())
+        //dismissViewControllerAnimated(true, completion: nil)
+        let modal = storyboard!.instantiateViewControllerWithIdentifier("ModalViewController")
+        travelPushBy(SlideInZoomOutAnimation(), to: modal)
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -44,7 +47,7 @@ class ModalViewController: UIViewController, StationPassenger {
         
         if sender.state == .Began {
             panStart = location.x
-            transit = travelBackBy(SlideInZoomOutInteraction(), with: allPassengers())
+            transit = travelPopBy(SlideInZoomOutInteraction())
         } else if sender.state == .Changed {
             let percentage = (location.x - panStart) / CGRectGetWidth(view.bounds)
             transit?.updateInteractLine(percentage)

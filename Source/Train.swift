@@ -12,15 +12,14 @@ struct Train {
     
     var fromStation: Station
     var toStation: Station
-    var passengers: [Passenger]
+    var passengers: [Passenger] = []
     
     init(from: Station, to: Station) {
-        self.init(from: from, to: to, passengers: [])
-    }
-    
-    init(from: Station, to: Station, passengers: [Passenger]) {
         fromStation = from
         toStation = to
-        self.passengers = passengers
+        
+        if let station = from as? StationPassenger {
+            passengers = station.allPassengers()
+        }
     }
 }

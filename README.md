@@ -8,15 +8,15 @@ Transit consists of four parts
 - **Train** is the data mover that move passengers from one station to another
 - **Line** is the animator to tell the library that how you going to animate between view controller
 
-### 🚉 Station (駅)
+## 🚉 Station (駅)
 Station is your view controllers
 ```
 typealias Station = UIViewController
 ```
 Most of the time you are dealing with simple view controller, only if you want to send some passengers to another station then have to extend `StationPassenger` protocol and return the list of passengers you want them to travel.
 
-### 👫 Passenger (旅客)
-Passengers are your subviews inside the root view in view controller. They can be identified by `name`. If both current train and destination station have same passenger with same name, thats mean passenger is travelling!
+## 👫 Passenger (旅客)
+Passengers are your subviews inside the root view in view controller. They can be identified by `name`. If both current train and destination station have same passenger with same name, thats mean passenger is traveling!
 ```
 struct Passenger {
     var name: String
@@ -24,14 +24,16 @@ struct Passenger {
 }
 ```
 
-### 🚇 Train (電車)
+## 🚇 Train (電車)
 Train knows which station they coming from and going to including the passengers on board. You will not use the train directly because the station will create the train for you.
 
-### 🛤 Line (線)
-Line is the important part here to create the animation. There are tree base lines for you to use.
-- **AnimationLine** normal line for UIView animation based
+## 🕹 Line (線)
+Line is the most important part here to create the animation. There are tree base lines for you to use.
+- **AnimationLine** normal line for `UIView` animation based
 - **ProgressLine** use `CADisplayLink` for animation
 - **InteractionLine** for interaction transition.
 
+## How to use
+## Installation
 ## Author
 Amornchai Kanokpullwad, [@zoonref](https://twitter.com/zoonref)
