@@ -38,7 +38,7 @@ struct SlideInZoomOutInteraction: InteractionLine {
     func interactCancel(fromView: UIView, toView: UIView, inView: UIView,
         lastProgress: CGFloat, velocity: CGPoint?) -> NSTimeInterval
     {
-        let d = NSTimeInterval(CGFloat(duration()) * lastProgress)
+        let d = NSTimeInterval(CGFloat(duration()) * abs(lastProgress))
         UIView.animateWithDuration(d,
             animations: {
                 toView.transform = CGAffineTransformMakeScale(0.9, 0.9)

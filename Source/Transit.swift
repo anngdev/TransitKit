@@ -162,6 +162,10 @@ extension Transit {
                 currentView.hidden = false
                 targetView.hidden = false
             }
+            
+            after(line.duration()) {
+                animateView.removeFromSuperview()
+            }
         }
     }
 }

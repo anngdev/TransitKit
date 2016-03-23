@@ -27,7 +27,7 @@ struct Passenger {
 ## 🚇 Train (電車)
 Train knows which station they coming from and going to including the passengers on board. You will not use the train directly because the station will create the train for you.
 
-## 🕹 Line (線)
+## 🚦 Line (線)
 Line is the most important part here to create the animation. There are tree base lines for you to use.
 - **AnimationLine** normal line for `UIView` animation based
 - **ProgressLine** use `CADisplayLink` for animation
