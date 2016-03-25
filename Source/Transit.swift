@@ -178,7 +178,7 @@ extension Transit {
         performProgress(0, context: co)
         
         // setup display link
-        let displayLink = CADisplayLink(target: self, selector: "progressDisplayLink:")
+        let displayLink = CADisplayLink(target: self, selector: #selector(Transit.progressDisplayLink(_:)))
         displayLinkLastTime = 0
         displayLink.addToRunLoop(NSRunLoop.mainRunLoop(), forMode: NSDefaultRunLoopMode)
         self.displayLink = displayLink

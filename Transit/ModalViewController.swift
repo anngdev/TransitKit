@@ -30,7 +30,7 @@ class ModalViewController: UIViewController, StationPassenger {
     }
     
     override func viewDidLoad() {
-        let panGesture = UIPanGestureRecognizer(target: self, action: "handlePan:")
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(ModalViewController.handlePan(_:)))
         view.addGestureRecognizer(panGesture)
     }
     
