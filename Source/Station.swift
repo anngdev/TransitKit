@@ -17,6 +17,20 @@ private struct AssociatedKeys {
 
 extension UIViewController {
     
+    private func transitBy(line: Line) -> Transit {
+        let transit = Transit(line: line)
+        objc_setAssociatedObject(self, &AssociatedKeys.transitKey, transit, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        return transit
+    }
+    
+    /**
+     Show modal view controller with specify Line
+     
+     - parameter line: Line to do animation
+     - parameter to:   Destination view controller
+     
+     - returns: Transit object that just created
+     */
     func travelBy(line: Line, to: Station) -> Transit {
         let transit = transitBy(line)
         to.transitioningDelegate = transit
@@ -24,6 +38,13 @@ extension UIViewController {
         return transit
     }
     
+    /**
+     Dismiss modal view controller with specify Line
+     
+     - parameter line: Line to do animation
+     
+     - returns: Transit object that just created
+     */
     func travelBackBy(line: Line) -> Transit {
         let transit = transitBy(line)
         transitioningDelegate = transit
@@ -31,6 +52,14 @@ extension UIViewController {
         return transit
     }
     
+    /**
+     Push to view controller with specify line
+     
+     - parameter line: Line to do animation (use `travelPushBy:to:normalLine` for interactive transition)
+     - parameter to:   Destination view controller
+     
+     - returns: Transit object that just created
+     */
     func travelPushBy(line: Line, to: Station) -> Transit {
         assert(!(line is InteractionLine), "please use another method for interaction line")
         let transit = transitBy(line)
@@ -39,6 +68,15 @@ extension UIViewController {
         return transit
     }
     
+    /**
+     Push to view controller with interaction line
+     
+     - parameter line:       Line to do interaction
+     - parameter to:         Destination view controller
+     - parameter normalLine: Line to do animation when fallback to non-interactive
+     
+     - returns: Transit object that just created
+     */
     func travelPushBy(line: InteractionLine, to: Station, normalLine: Line) -> Transit {
         assert(!(normalLine is InteractionLine), "normalLine cannot be interaction line")
         let transit = Transit(line: line)
@@ -48,6 +86,13 @@ extension UIViewController {
         return transit
     }
     
+    /**
+     Pop view controller with interaction line (use navigation `popViewControllerAnimated:` for non-interactive)
+     
+     - parameter line: Line to do interaction
+     
+     - returns: Transit object that just created
+     */
     func travelPopBy(line: InteractionLine) -> Transit {
         let transit = Transit(line: line)
         let oldDelegate = navigationController?.delegate
@@ -56,17 +101,20 @@ extension UIViewController {
         navigationController?.delegate = oldDelegate
         return transit
     }
-    
-    private func transitBy(line: Line) -> Transit {
-        let transit = Transit(line: line)
-        objc_setAssociatedObject(self, &AssociatedKeys.transitKey, transit, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-        return transit
-    }
 }
 
 // MARK: - Passenger
 
+/**
+ *  Implement this protocol to animate with subview passenger
+ */
 protocol StationPassenger {
+    
+    /**
+     All passengers with it's subview and name for this view controller
+     
+     - returns: list of passengers
+     */
     func allPassengers() -> [Passenger]
 }
 
