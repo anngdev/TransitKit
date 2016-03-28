@@ -16,6 +16,9 @@
 		DC49B79C1C89EC8100A98382 /* Train.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC49B79B1C89EC8100A98382 /* Train.swift */; };
 		DC49B79E1C89ED5600A98382 /* Passenger.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC49B79D1C89ED5600A98382 /* Passenger.swift */; };
 		DC49B7A01C8A01A400A98382 /* Transit.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC49B79F1C8A01A400A98382 /* Transit.swift */; };
+		DC5D49C31CA800410019F1A2 /* LineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5D49C21CA800410019F1A2 /* LineViewController.swift */; };
+		DC5D49C51CA808090019F1A2 /* AnimationLineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5D49C41CA808090019F1A2 /* AnimationLineViewController.swift */; };
+		DC5D49C71CA84ADD0019F1A2 /* ProgressLineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5D49C61CA84ADD0019F1A2 /* ProgressLineViewController.swift */; };
 		DC8889651C8ADFAD00C0A358 /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8889641C8ADFAD00C0A358 /* Line.swift */; };
 		DC93099C1C8AFEE6000606C2 /* ModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC93099B1C8AFEE6000606C2 /* ModalViewController.swift */; };
 		DC93099F1C8B0116000606C2 /* SlideInZoomOutAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC93099E1C8B0116000606C2 /* SlideInZoomOutAnimation.swift */; };
@@ -35,6 +38,9 @@
 		DC49B79B1C89EC8100A98382 /* Train.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Train.swift; sourceTree = "<group>"; };
 		DC49B79D1C89ED5600A98382 /* Passenger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Passenger.swift; sourceTree = "<group>"; };
 		DC49B79F1C8A01A400A98382 /* Transit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transit.swift; sourceTree = "<group>"; };
+		DC5D49C21CA800410019F1A2 /* LineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineViewController.swift; sourceTree = "<group>"; };
+		DC5D49C41CA808090019F1A2 /* AnimationLineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationLineViewController.swift; sourceTree = "<group>"; };
+		DC5D49C61CA84ADD0019F1A2 /* ProgressLineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressLineViewController.swift; sourceTree = "<group>"; };
 		DC8889641C8ADFAD00C0A358 /* Line.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Line.swift; sourceTree = "<group>"; };
 		DC93099B1C8AFEE6000606C2 /* ModalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModalViewController.swift; sourceTree = "<group>"; };
 		DC93099E1C8B0116000606C2 /* SlideInZoomOutAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideInZoomOutAnimation.swift; sourceTree = "<group>"; };
@@ -80,6 +86,9 @@
 				DC49B78D1C89E49200A98382 /* Assets.xcassets */,
 				DC49B78F1C89E49200A98382 /* LaunchScreen.storyboard */,
 				DC49B7921C89E49200A98382 /* Info.plist */,
+				DC5D49C21CA800410019F1A2 /* LineViewController.swift */,
+				DC5D49C41CA808090019F1A2 /* AnimationLineViewController.swift */,
+				DC5D49C61CA84ADD0019F1A2 /* ProgressLineViewController.swift */,
 			);
 			path = Transit;
 			sourceTree = "<group>";
@@ -180,11 +189,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				DC93099C1C8AFEE6000606C2 /* ModalViewController.swift in Sources */,
+				DC5D49C51CA808090019F1A2 /* AnimationLineViewController.swift in Sources */,
 				DC93099F1C8B0116000606C2 /* SlideInZoomOutAnimation.swift in Sources */,
+				DC5D49C31CA800410019F1A2 /* LineViewController.swift in Sources */,
 				DCEC2DD91C95965800DF781B /* SlideInZoomOutInteraction.swift in Sources */,
 				DC49B79C1C89EC8100A98382 /* Train.swift in Sources */,
 				DC49B7891C89E49200A98382 /* ViewController.swift in Sources */,
 				DC49B79E1C89ED5600A98382 /* Passenger.swift in Sources */,
+				DC5D49C71CA84ADD0019F1A2 /* ProgressLineViewController.swift in Sources */,
 				DCCEBA011C94209600CA1D3C /* SlideInZoomOutProgress.swift in Sources */,
 				DC49B7A01C8A01A400A98382 /* Transit.swift in Sources */,
 				DC49B79A1C89E55300A98382 /* Station.swift in Sources */,

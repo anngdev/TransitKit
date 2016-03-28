@@ -17,7 +17,14 @@ private struct AssociatedKeys {
 
 extension UIViewController {
     
-    private func transitBy(line: Line) -> Transit {
+    /**
+     Create transit object and use manually
+     
+     - parameter line: Line to do animation
+     
+     - returns: Transit object that just created
+     */
+    func transitBy(line: Line) -> Transit {
         let transit = Transit(line: line)
         objc_setAssociatedObject(self, &AssociatedKeys.transitKey, transit, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         return transit

@@ -96,6 +96,7 @@ extension Transit: UIViewControllerAnimatedTransitioning {
         
         co.toView.frame = transitionContext.finalFrameForViewController(co.toVC)
         co.container.addSubview(co.toView)
+        co.container.layoutIfNeeded()
         
         if direction == .Return {
             // fromView should be start at most top position
@@ -123,15 +124,15 @@ extension Transit {
     func animate(line: AnimationLine, direction: Direction, toStation: Station,
         fromView: UIView, toView: UIView, inView: UIView, context: UIViewControllerContextTransitioning)
     {
-        line.animate(fromView, toView: toView, inView: inView, direction: direction)
-        after(line.duration()) {
-            context.completeTransition(!context.transitionWasCancelled())
-        }
-        
         // passengers
         if let station = toStation as? StationPassenger {
             animatePassenger(train!.passengers, toStation: station, byLine: line,
                 fromView: fromView, toView: toView, inView: inView)
+        }
+        
+        line.animate(fromView, toView: toView, inView: inView, direction: direction)
+        after(line.duration()) {
+            context.completeTransition(!context.transitionWasCancelled())
         }
     }
     
@@ -146,8 +147,8 @@ extension Transit {
             let currentView = passenger.view
             let targetView = p.view
             let animateView = currentView.snapshotViewAfterScreenUpdates(false)
-            let currentFrame = currentView.superview!.convertRect(currentView.frame, toView: fromView)
-            let targetFrame = targetView.superview!.convertRect(targetView.frame, toView: toView)
+            let currentFrame = currentView.superview!.convertRect(currentView.frame, toView: nil)
+            let targetFrame = targetView.superview!.convertRect(targetView.frame, toView: nil)
             
             animateView.frame = currentFrame
             inView.addSubview(animateView)
@@ -301,7 +302,7 @@ extension Transit {
             
             let targetView = p.view
             let currentView = passenger.view
-            let currentFrame = currentView.superview!.convertRect(currentView.frame, toView: fromView)
+            let currentFrame = currentView.superview!.convertRect(currentView.frame, toView: nil)
             var animateView = inView.viewWithTag(viewTagOffset + index)
             
             if animateView == nil {
@@ -314,7 +315,10 @@ extension Transit {
                 targetView.hidden = true
             }
             
-            let targetFrame = targetView.superview!.convertRect(targetView.frame, toView: toView)
+            let targetFrame = targetView.superview!.convertRect(targetView.frame, toView: nil)
+            
+            print(currentFrame)
+            print(targetFrame)
             
             if let l = byLine as? ProgressLine {
                 l.progressPassenger(animateView!, fromFrame: currentFrame, toFrame: targetFrame, direction: direction,
