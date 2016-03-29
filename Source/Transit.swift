@@ -185,7 +185,7 @@ extension Transit {
         // setup display link
         let displayLink = CADisplayLink(target: self, selector: #selector(Transit.progressDisplayLink(_:)))
         displayLinkLastTime = 0
-        displayLink.addToRunLoop(NSRunLoop.mainRunLoop(), forMode: NSDefaultRunLoopMode)
+        displayLink.addToRunLoop(NSRunLoop.mainRunLoop(), forMode: NSRunLoopCommonModes)
         self.displayLink = displayLink
     }
     
@@ -197,7 +197,7 @@ extension Transit {
             // passengers
             if let station = train!.toStation as? StationPassenger {
                 moveAllPassengers(train!.passengers, toStation: station, byLine: progressLine,
-                    fromView: context.fromView, toView: context.toView, inView: context.container, progress: progress)
+                    context: context, progress: progress)
             }
         }
     }
@@ -243,7 +243,7 @@ extension Transit {
                 
                 if let station = train!.toStation as? StationPassenger {
                     moveAllPassengers(train!.passengers, toStation: station, byLine: interactionLine,
-                        fromView: co.fromView, toView: co.toView, inView: co.container, progress: percentComplete)
+                        context: co, progress: percentComplete)
                 }
             }
         }
@@ -291,7 +291,7 @@ extension Transit {
     
     // for progress and interactive
     private func moveAllPassengers(passengers: [Passenger], toStation: StationPassenger, byLine: Line,
-        fromView: UIView, toView: UIView, inView: UIView, progress: CGFloat)
+        context: ContextObjects, progress: CGFloat)
     {
         guard byLine is ProgressLine || byLine is InteractionLine else { return }
         
@@ -302,26 +302,27 @@ extension Transit {
             
             let targetView = p.view
             let currentView = passenger.view
-            let currentFrame = currentView.superview!.convertRect(currentView.frame, toView: nil)
-            var animateView = inView.viewWithTag(viewTagOffset + index)
+            var animateView = context.container.viewWithTag(viewTagOffset + index)
+            
+            let currentFrame = currentView.superview!.convertRect(currentView.frame, toView: context.fromView)
+            let startFrame = CGRectOffset(currentFrame, 0, context.fromVC.topLayoutGuide.length)
             
             if animateView == nil {
                 animateView = currentView.snapshotViewAfterScreenUpdates(false)
-                animateView?.frame = currentFrame
+                animateView?.frame = startFrame
                 animateView?.tag = viewTagOffset + index
-                inView.addSubview(animateView!)
+                context.container.addSubview(animateView!)
                 
                 currentView.hidden = true
                 targetView.hidden = true
             }
             
-            let targetFrame = targetView.superview!.convertRect(targetView.frame, toView: nil)
-            
-            print(currentFrame)
-            print(targetFrame)
+            let targetFrame = targetView.superview!.convertRect(targetView.frame, toView: context.toView)
+            let endFrame = CGRectOffset(targetFrame, 0, context.toVC.topLayoutGuide.length)
             
             if let l = byLine as? ProgressLine {
-                l.progressPassenger(animateView!, fromFrame: currentFrame, toFrame: targetFrame, direction: direction,
+                l.progressPassenger(animateView!, fromFrame: startFrame
+                    , toFrame: endFrame, direction: direction,
                     progress: progress)
                 
                 if progress == 1 {
@@ -330,7 +331,7 @@ extension Transit {
                     animateView?.removeFromSuperview()
                 }
             } else if let l = byLine as? InteractionLine {
-                l.interactPassenger(animateView!, fromFrame: currentFrame, toFrame: targetFrame, progress: progress)
+                l.interactPassenger(animateView!, fromFrame: startFrame, toFrame: endFrame, progress: progress)
             }
         }
     }
@@ -382,12 +383,14 @@ private struct ContextObjects {
     let container: UIView
     let fromView: UIView
     let toView: UIView
+    let fromVC: Station
     let toVC: Station
     
     init(context: UIViewControllerContextTransitioning) {
         container = context.containerView()!
         fromView = context.viewForKey(UITransitionContextFromViewKey)!
         toView = context.viewForKey(UITransitionContextToViewKey)!
+        fromVC = context.viewControllerForKey(UITransitionContextFromViewControllerKey)!
         toVC = context.viewControllerForKey(UITransitionContextToViewControllerKey)!
     }
 }
