@@ -134,7 +134,7 @@ extension Transit {
         
         line.animate(fromView, toView: toView, inView: inView, direction: direction)
         
-        after(line.duration()) {
+        after(line.duration() + 0.05) {
             line.afterArrived(fromView, toView: toView, inView: inView, direction: direction)
             context.completeTransition(!context.transitionWasCancelled())
         }
@@ -221,14 +221,17 @@ extension Transit {
                 performProgress(progress, context: co)
             }
         } else {
+            sender.invalidate()
+            displayLink = nil
+            
             if let co = tempContext {
                 performProgress(1, context: co)
                 line.afterArrived(co.fromView, toView: co.toView, inView: co.container, direction: direction)
-                co.context.completeTransition(!co.context.transitionWasCancelled())
+                
+                after(0.05) {
+                    co.context.completeTransition(!co.context.transitionWasCancelled())
+                }
             }
-            
-            sender.invalidate()
-            displayLink = nil
         }
     }
 }
@@ -322,9 +325,7 @@ extension Transit {
             
             let targetFrame = targetView.superview!.convertRect(targetView.frame, toView: context.toView)
             let endFrame = CGRectOffset(targetFrame, 0, context.toOffset)
-            
-            print(context.toOffset)
-            
+                        
             if let l = byLine as? ProgressLine {
                 l.progressPassenger(animateView!, fromFrame: startFrame, toFrame: endFrame, direction: direction,
                     progress: progress)
