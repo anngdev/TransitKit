@@ -77,7 +77,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="60" id="ULM-Jd-EpJ">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="60" id="ULM-Jd-EpJ">
                                         <rect key="frame" x="0.0" y="184" width="600" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ULM-Jd-EpJ" id="tay-eN-avp">
@@ -100,6 +100,10 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <gestureRecognizers/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="SGn-Pz-0cO" appends="YES" id="H42-Vy-zhC"/>
+                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -113,9 +117,15 @@
                     <connections>
                         <segue destination="xpC-FY-CY0" kind="show" id="tYy-31-ttk"/>
                         <segue destination="Kg7-pV-uG8" kind="show" id="qWB-3r-KoR"/>
+                        <segue destination="iKr-Eh-uLW" kind="show" id="OEl-Zx-24M"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UAu-6n-kmX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="SGn-Pz-0cO">
+                    <connections>
+                        <action selector="handlePan:" destination="VHc-ex-3WG" id="tCA-dX-pSD"/>
+                    </connections>
+                </panGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="408" y="-263"/>
         </scene>
@@ -215,6 +225,57 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Au6-Xt-LUN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1124" y="99"/>
+        </scene>
+        <!--Interaction Line-->
+        <scene sceneID="Axq-9k-FtT">
+            <objects>
+                <tableViewController storyboardIdentifier="InteractionVC" id="iKr-Eh-uLW" customClass="InteractionLineViewController" customModule="Transit" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="175" sectionHeaderHeight="28" sectionFooterHeight="28" id="UTc-o5-6Jd">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <sections>
+                            <tableViewSection id="YfI-Y6-yhx">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="175" id="6jb-v5-cxa">
+                                        <rect key="frame" x="0.0" y="64" width="600" height="175"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6jb-v5-cxa" id="0h6-kJ-ehR">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="174.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon" translatesAutoresizingMaskIntoConstraints="NO" id="6yt-ci-kEP">
+                                                    <rect key="frame" x="236" y="24" width="128" height="128"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="128" id="arY-DP-Hmc"/>
+                                                        <constraint firstAttribute="height" constant="128" id="zPu-Vx-TFo"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
+                                                            <color key="value" red="0.5568627451" green="0.23137254900000001" blue="0.58431372550000005" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </imageView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="6yt-ci-kEP" firstAttribute="top" secondItem="0h6-kJ-ehR" secondAttribute="topMargin" constant="16" id="jIC-hR-tdz"/>
+                                                <constraint firstItem="6yt-ci-kEP" firstAttribute="centerX" secondItem="0h6-kJ-ehR" secondAttribute="centerX" id="wLw-Ck-C3a"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="iKr-Eh-uLW" id="Rh0-aj-D4j"/>
+                            <outlet property="delegate" destination="iKr-Eh-uLW" id="ftv-zS-PYx"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Interaction Line" id="ZZB-Rt-grq"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HCh-HE-8gd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1124" y="801"/>
         </scene>
     </scenes>
     <resources>

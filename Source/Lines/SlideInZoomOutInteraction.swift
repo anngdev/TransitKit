@@ -14,46 +14,75 @@ struct SlideInZoomOutInteraction: InteractionLine {
         return 1
     }
     
-    func interact(fromView: UIView, toView: UIView, inView: UIView, progress: CGFloat) {
-        if progress == 0 {
+    func beforeDepart(fromView: UIView, toView: UIView, inView: UIView, direction: Direction) {
+        if direction == .Return {
             toView.transform = CGAffineTransformMakeScale(0.9, 0.9)
+        } else {
+            toView.frame = CGRectMake(inView.frame.size.width, 0, toView.frame.size.width, toView.frame.size.height)
         }
-        let scale = 0.9 + (0.1 * progress)
-        let x = inView.frame.width * progress
-        toView.transform = CGAffineTransformMakeScale(scale, scale)
-        fromView.frame = CGRectMake(x, 0, fromView.frame.size.width, fromView.frame.size.height)
     }
     
-    func interactFinish(fromView: UIView, toView: UIView, inView: UIView,
+    func afterArrived(fromView: UIView, toView: UIView, inView: UIView, direction: Direction) {
+        // clear transformation
+        fromView.transform = CGAffineTransformIdentity
+        toView.transform = CGAffineTransformIdentity
+    }
+    
+    func progress(fromView: UIView, toView: UIView, inView: UIView, direction: Direction, progress: CGFloat) {
+        if direction == .Go {
+            let scale = 1 - (0.1 * progress)
+            let x = inView.frame.width - inView.frame.width * progress
+            fromView.alpha = 1 - (progress * 0.5)
+            fromView.transform = CGAffineTransformMakeScale(scale, scale)
+            toView.frame = CGRectMake(x, 0, toView.frame.size.width, toView.frame.size.height)
+        } else {
+            let scale = 0.9 + (0.1 * progress)
+            let x = inView.frame.width * progress
+            toView.alpha = 0.5 + (progress * 0.5)
+            toView.transform = CGAffineTransformMakeScale(scale, scale)
+            fromView.frame = CGRectMake(x, 0, fromView.frame.size.width, fromView.frame.size.height)
+        }
+    }
+    
+    func interactFinish(fromView: UIView, toView: UIView, inView: UIView, direction: Direction,
         lastProgress: CGFloat, velocity: CGPoint?) -> NSTimeInterval
     {
         let d = NSTimeInterval(CGFloat(duration()) * (1 - lastProgress))
         UIView.animateWithDuration(d) {
-            toView.transform = CGAffineTransformIdentity
-            fromView.frame = CGRectMake(inView.frame.width, 0, fromView.frame.size.width, fromView.frame.size.height)
+            if direction == .Go {
+                fromView.alpha = 0.5
+                fromView.transform = CGAffineTransformMakeScale(0.9, 0.9)
+                toView.frame = CGRectMake(0, 0, toView.frame.size.width, toView.frame.size.height)
+            } else {
+                toView.alpha = 1
+                toView.transform = CGAffineTransformIdentity
+                fromView.frame = CGRectMake(inView.frame.width, 0, fromView.frame.size.width, fromView.frame.size.height)
+            }
         }
         return d
     }
     
-    func interactCancel(fromView: UIView, toView: UIView, inView: UIView,
+    func interactCancel(fromView: UIView, toView: UIView, inView: UIView, direction: Direction,
         lastProgress: CGFloat, velocity: CGPoint?) -> NSTimeInterval
     {
         let d = NSTimeInterval(CGFloat(duration()) * abs(lastProgress))
-        UIView.animateWithDuration(d,
-            animations: {
+        UIView.animateWithDuration(d) {
+            if direction == .Go {
+                fromView.alpha = 1
+                fromView.transform = CGAffineTransformIdentity
+                toView.frame = CGRectMake(inView.frame.width, 0, fromView.frame.size.width, fromView.frame.size.height)
+            } else {
+                toView.alpha = 0.5
                 toView.transform = CGAffineTransformMakeScale(0.9, 0.9)
                 fromView.frame = CGRectMake(0, 0, fromView.frame.size.width, fromView.frame.size.height)
-            },
-            completion: { completion in
-                // clear transformation
-                toView.transform = CGAffineTransformIdentity
-        })
+            }
+        }
         return d
     }
     
     // passenger
     
-    func interactPassenger(view: UIView, fromFrame: CGRect, toFrame: CGRect, progress: CGFloat) {
+    func progressPassenger(view: UIView, fromFrame: CGRect, toFrame: CGRect, direction: Direction, progress: CGFloat) {
         func translate(progress: CGFloat, value: CGFloat, target: CGFloat) -> CGFloat {
             return value + (target - value) * progress
         }

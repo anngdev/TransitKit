@@ -19,6 +19,16 @@ protocol Line {
      - returns: time interval of the transition this line will be used
      */
     func duration() -> NSTimeInterval
+    
+    /**
+     Call before animation begins
+     */
+    func beforeDepart(fromView: UIView, toView: UIView, inView: UIView, direction: Direction)
+    
+    /**
+     Call after animation finished
+     */
+    func afterArrived(fromView: UIView, toView: UIView, inView: UIView, direction: Direction)
 }
 
 /**
@@ -77,17 +87,7 @@ protocol ProgressLine: Line {
 /**
  *  Protocol for interactive transition
  */
-protocol InteractionLine: Line {
-    
-    /**
-     This function will be called to update views for interactive transition
-     
-     - parameter fromView: view of view controller that going to disappear
-     - parameter toView:   view of view controller that going to appear
-     - parameter inView:   container view for transition
-     - parameter progress: progress of the animation value between (can be minus or > 1)
-     */
-    func interact(fromView: UIView, toView: UIView, inView: UIView, progress: CGFloat)
+protocol InteractionLine: ProgressLine {
     
     /**
      This function will be called if interactive end and needs to animate to finish the transition
@@ -100,7 +100,7 @@ protocol InteractionLine: Line {
      
      - returns: custom animation time that this animation will use
      */
-    func interactFinish(fromView: UIView, toView: UIView, inView: UIView,
+    func interactFinish(fromView: UIView, toView: UIView, inView: UIView, direction: Direction,
                         lastProgress: CGFloat, velocity: CGPoint?) -> NSTimeInterval
     
     /**
@@ -114,18 +114,8 @@ protocol InteractionLine: Line {
      
      - returns: custom animation time that this animation will use
      */
-    func interactCancel(fromView: UIView, toView: UIView, inView: UIView,
+    func interactCancel(fromView: UIView, toView: UIView, inView: UIView, direction: Direction,
                         lastProgress: CGFloat, velocity: CGPoint?) -> NSTimeInterval
-    
-    /**
-     This function will be called to update subviews for interactive transition
-     
-     - parameter view:      subview that will be updated
-     - parameter fromFrame: current initial frame of subview
-     - parameter toFrame:   frame of the same subview name in destination view controller
-     - parameter progress:  progress of the interaction
-     */
-    func interactPassenger(view: UIView, fromFrame: CGRect, toFrame: CGRect, progress: CGFloat)
     
     /**
      This function will be called if interactive end and needs to animate subviews to finish the transition

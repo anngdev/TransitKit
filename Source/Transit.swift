@@ -20,7 +20,7 @@ public class Transit: UIPercentDrivenInteractiveTransition {
     var train: Train?
     var direction: Direction = .Go
     
-    private var tempContext: UIViewControllerContextTransitioning?
+    private var tempContext: ContextObjects?
     
     private var displayLink: CADisplayLink?
     private var displayLinkLastTime: NSTimeInterval = 0
@@ -103,6 +103,8 @@ extension Transit: UIViewControllerAnimatedTransitioning {
             co.container.bringSubviewToFront(co.fromView)
         }
         
+        line.beforeDepart(co.fromView, toView: co.toView, inView: co.container, direction: direction)
+        
         // normal animation
         if let animateLine = line as? AnimationLine {
             animate(animateLine, direction: direction, toStation: co.toVC,
@@ -131,7 +133,9 @@ extension Transit {
         }
         
         line.animate(fromView, toView: toView, inView: inView, direction: direction)
+        
         after(line.duration()) {
+            line.afterArrived(fromView, toView: toView, inView: inView, direction: direction)
             context.completeTransition(!context.transitionWasCancelled())
         }
     }
@@ -178,15 +182,16 @@ extension Transit {
     func progress(line: ProgressLine, direction: Direction, toStation: Station,
         fromView: UIView, toView: UIView, inView: UIView, context: UIViewControllerContextTransitioning)
     {
-        tempContext = context
-        let co = ContextObjects(context: context)
-        performProgress(0, context: co)
-        
-        // setup display link
-        let displayLink = CADisplayLink(target: self, selector: #selector(Transit.progressDisplayLink(_:)))
-        displayLinkLastTime = 0
-        displayLink.addToRunLoop(NSRunLoop.mainRunLoop(), forMode: NSRunLoopCommonModes)
-        self.displayLink = displayLink
+        tempContext = ContextObjects(context: context)
+        if let co = tempContext {
+            performProgress(0, context: co)
+            
+            // setup display link
+            let displayLink = CADisplayLink(target: self, selector: #selector(Transit.progressDisplayLink(_:)))
+            displayLinkLastTime = 0
+            displayLink.addToRunLoop(NSRunLoop.mainRunLoop(), forMode: NSRunLoopCommonModes)
+            self.displayLink = displayLink
+        }
     }
     
     private func performProgress(progress: CGFloat, context: ContextObjects) {
@@ -212,15 +217,14 @@ extension Transit {
         let timeRemaining = max(line.duration() - timeUsed, 0)
         if timeRemaining > 0 {
             let progress = CGFloat(timeUsed / line.duration())
-            if let context = tempContext {
-                let co = ContextObjects(context: context)
+            if let co = tempContext {
                 performProgress(progress, context: co)
             }
         } else {
-            if let context = tempContext {
-                let co = ContextObjects(context: context)
+            if let co = tempContext {
                 performProgress(1, context: co)
-                context.completeTransition(!context.transitionWasCancelled())
+                line.afterArrived(co.fromView, toView: co.toView, inView: co.container, direction: direction)
+                co.context.completeTransition(!co.context.transitionWasCancelled())
             }
             
             sender.invalidate()
@@ -235,10 +239,9 @@ extension Transit {
     
     public func updateInteractLine(percentComplete: CGFloat) {
         lastInteractionProgress = percentComplete
-        if let context = tempContext {
-            let co = ContextObjects(context: context)
+        if let co = tempContext {
             if let interactionLine = line as? InteractionLine {
-                interactionLine.interact(co.fromView, toView: co.toView, inView: co.container,
+                interactionLine.progress(co.fromView, toView: co.toView, inView: co.container, direction: direction,
                     progress: percentComplete)
                 
                 if let station = train!.toStation as? StationPassenger {
@@ -260,27 +263,27 @@ extension Transit {
     }
     
     private func endInteraction(finish: Bool, withVelocity: CGPoint?) {
-        guard let context = tempContext else { return }
+        guard let co = tempContext else { return }
         guard let interactionLine = line as? InteractionLine else { return }
         
-        let co = ContextObjects(context: context)
         var duration: NSTimeInterval = 0
         if finish {
             duration = interactionLine.interactFinish(co.fromView, toView: co.toView, inView: co.container,
-                lastProgress: lastInteractionProgress, velocity: withVelocity)
+                direction: direction, lastProgress: lastInteractionProgress, velocity: withVelocity)
         } else {
             duration = interactionLine.interactCancel(co.fromView, toView: co.toView, inView: co.container,
-                lastProgress: lastInteractionProgress, velocity: withVelocity)
+                direction: direction, lastProgress: lastInteractionProgress, velocity: withVelocity)
         }
         
         if let station = train!.toStation as? StationPassenger {
             finishMoveAllPassengers(train!.passengers, toStation: station, byLine: interactionLine,
-                fromView: co.fromView, toView: co.toView, inView: co.container, duration: duration, finish: finish)
+                context: co, duration: duration, finish: finish)
         }
         
         after(duration) {
-            self.tempContext?.completeTransition(finish)
-            self.tempContext = nil
+            interactionLine.afterArrived(co.fromView, toView: co.toView,
+                inView: co.container, direction: self.direction)
+            co.context.completeTransition(finish)
         }
     }
 }
@@ -293,7 +296,7 @@ extension Transit {
     private func moveAllPassengers(passengers: [Passenger], toStation: StationPassenger, byLine: Line,
         context: ContextObjects, progress: CGFloat)
     {
-        guard byLine is ProgressLine || byLine is InteractionLine else { return }
+        guard byLine is ProgressLine else { return }
         
         for (index, passenger) in passengers.enumerate() {
             let toPassenger = toStation.passengerByName(passenger.name)
@@ -305,7 +308,7 @@ extension Transit {
             var animateView = context.container.viewWithTag(viewTagOffset + index)
             
             let currentFrame = currentView.superview!.convertRect(currentView.frame, toView: context.fromView)
-            let startFrame = CGRectOffset(currentFrame, 0, context.fromVC.topLayoutGuide.length)
+            let startFrame = CGRectOffset(currentFrame, 0, context.fromOffset)
             
             if animateView == nil {
                 animateView = currentView.snapshotViewAfterScreenUpdates(false)
@@ -318,11 +321,12 @@ extension Transit {
             }
             
             let targetFrame = targetView.superview!.convertRect(targetView.frame, toView: context.toView)
-            let endFrame = CGRectOffset(targetFrame, 0, context.toVC.topLayoutGuide.length)
+            let endFrame = CGRectOffset(targetFrame, 0, context.toOffset)
+            
+            print(context.toOffset)
             
             if let l = byLine as? ProgressLine {
-                l.progressPassenger(animateView!, fromFrame: startFrame
-                    , toFrame: endFrame, direction: direction,
+                l.progressPassenger(animateView!, fromFrame: startFrame, toFrame: endFrame, direction: direction,
                     progress: progress)
                 
                 if progress == 1 {
@@ -330,29 +334,32 @@ extension Transit {
                     targetView.hidden = false
                     animateView?.removeFromSuperview()
                 }
-            } else if let l = byLine as? InteractionLine {
-                l.interactPassenger(animateView!, fromFrame: startFrame, toFrame: endFrame, progress: progress)
             }
         }
     }
     
     private func finishMoveAllPassengers(passengers: [Passenger], toStation: StationPassenger, byLine: InteractionLine,
-        fromView: UIView, toView: UIView, inView: UIView, duration: NSTimeInterval, finish: Bool)
+        context: ContextObjects, duration: NSTimeInterval, finish: Bool)
     {
         for (index, passenger) in passengers.enumerate() {
             let toPassenger = toStation.passengerByName(passenger.name)
             
             guard let p = toPassenger else { return }
-            guard let animateView = inView.viewWithTag(viewTagOffset + index) else { continue }
+            guard let animateView = context.container.viewWithTag(viewTagOffset + index) else { continue }
             
             let currentView = passenger.view
             let targetView = p.view
-            let targetFrame = targetView.superview!.convertRect(targetView.frame, toView: toView)
+            
+            let currentFrame = currentView.superview!.convertRect(currentView.frame, toView: context.fromView)
+            let startFrame = CGRectOffset(currentFrame, 0, context.fromOffset)
+            
+            let targetFrame = targetView.superview!.convertRect(targetView.frame, toView: context.toView)
+            let endFrame = CGRectOffset(targetFrame, 0, context.toOffset)
             
             if finish {
-                byLine.interactPassengerFinish(animateView, toFrame: targetFrame, duration: duration)
+                byLine.interactPassengerFinish(animateView, toFrame: endFrame, duration: duration)
             } else {
-                byLine.interactPassengerCancel(animateView, toFrame: currentView.frame, duration: duration)
+                byLine.interactPassengerCancel(animateView, toFrame: startFrame, duration: duration)
             }
             
             after(duration) {
@@ -369,29 +376,44 @@ extension Transit {
 extension Transit {
     
     public override func startInteractiveTransition(transitionContext: UIViewControllerContextTransitioning) {
-        tempContext = transitionContext
+        // add view first
         let co = ContextObjects(context: transitionContext)
         co.toView.frame = transitionContext.finalFrameForViewController(co.toVC)
         co.container.addSubview(co.toView)
-        co.container.bringSubviewToFront(co.fromView)
+        if direction == .Return {
+            // fromView should be start at most top position
+            co.container.bringSubviewToFront(co.fromView)
+        }
+        
+        // then save the updated context
+        tempContext = ContextObjects(context: transitionContext)
+        if let co = tempContext {
+            line.beforeDepart(co.fromView, toView: co.toView, inView: co.container, direction: direction)
+        }
     }
 }
 
 // MARK:- Util
 
 private struct ContextObjects {
+    let context: UIViewControllerContextTransitioning
     let container: UIView
     let fromView: UIView
     let toView: UIView
     let fromVC: Station
     let toVC: Station
+    let fromOffset: CGFloat
+    let toOffset: CGFloat
     
     init(context: UIViewControllerContextTransitioning) {
+        self.context = context
         container = context.containerView()!
         fromView = context.viewForKey(UITransitionContextFromViewKey)!
         toView = context.viewForKey(UITransitionContextToViewKey)!
         fromVC = context.viewControllerForKey(UITransitionContextFromViewControllerKey)!
         toVC = context.viewControllerForKey(UITransitionContextToViewControllerKey)!
+        fromOffset = fromVC.topLayoutGuide.length
+        toOffset = toVC.topLayoutGuide.length
     }
 }
 

@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		DC49B7871C89E49200A98382 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC49B7861C89E49200A98382 /* AppDelegate.swift */; };
-		DC49B7891C89E49200A98382 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC49B7881C89E49200A98382 /* ViewController.swift */; };
 		DC49B78C1C89E49200A98382 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC49B78A1C89E49200A98382 /* Main.storyboard */; };
 		DC49B78E1C89E49200A98382 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC49B78D1C89E49200A98382 /* Assets.xcassets */; };
 		DC49B7911C89E49200A98382 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC49B78F1C89E49200A98382 /* LaunchScreen.storyboard */; };
@@ -20,16 +19,15 @@
 		DC5D49C51CA808090019F1A2 /* AnimationLineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5D49C41CA808090019F1A2 /* AnimationLineViewController.swift */; };
 		DC5D49C71CA84ADD0019F1A2 /* ProgressLineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5D49C61CA84ADD0019F1A2 /* ProgressLineViewController.swift */; };
 		DC8889651C8ADFAD00C0A358 /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8889641C8ADFAD00C0A358 /* Line.swift */; };
-		DC93099C1C8AFEE6000606C2 /* ModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC93099B1C8AFEE6000606C2 /* ModalViewController.swift */; };
 		DC93099F1C8B0116000606C2 /* SlideInZoomOutAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC93099E1C8B0116000606C2 /* SlideInZoomOutAnimation.swift */; };
 		DCCEBA011C94209600CA1D3C /* SlideInZoomOutProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCCEBA001C94209600CA1D3C /* SlideInZoomOutProgress.swift */; };
+		DCE025481CAAD15300FC07FB /* InteractionLineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE025471CAAD15300FC07FB /* InteractionLineViewController.swift */; };
 		DCEC2DD91C95965800DF781B /* SlideInZoomOutInteraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEC2DD81C95965800DF781B /* SlideInZoomOutInteraction.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		DC49B7831C89E49200A98382 /* Transit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Transit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC49B7861C89E49200A98382 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		DC49B7881C89E49200A98382 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		DC49B78B1C89E49200A98382 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DC49B78D1C89E49200A98382 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DC49B7901C89E49200A98382 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -42,9 +40,9 @@
 		DC5D49C41CA808090019F1A2 /* AnimationLineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationLineViewController.swift; sourceTree = "<group>"; };
 		DC5D49C61CA84ADD0019F1A2 /* ProgressLineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressLineViewController.swift; sourceTree = "<group>"; };
 		DC8889641C8ADFAD00C0A358 /* Line.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Line.swift; sourceTree = "<group>"; };
-		DC93099B1C8AFEE6000606C2 /* ModalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModalViewController.swift; sourceTree = "<group>"; };
 		DC93099E1C8B0116000606C2 /* SlideInZoomOutAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideInZoomOutAnimation.swift; sourceTree = "<group>"; };
 		DCCEBA001C94209600CA1D3C /* SlideInZoomOutProgress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideInZoomOutProgress.swift; sourceTree = "<group>"; };
+		DCE025471CAAD15300FC07FB /* InteractionLineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InteractionLineViewController.swift; sourceTree = "<group>"; };
 		DCEC2DD81C95965800DF781B /* SlideInZoomOutInteraction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideInZoomOutInteraction.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -80,8 +78,6 @@
 			isa = PBXGroup;
 			children = (
 				DC49B7861C89E49200A98382 /* AppDelegate.swift */,
-				DC49B7881C89E49200A98382 /* ViewController.swift */,
-				DC93099B1C8AFEE6000606C2 /* ModalViewController.swift */,
 				DC49B78A1C89E49200A98382 /* Main.storyboard */,
 				DC49B78D1C89E49200A98382 /* Assets.xcassets */,
 				DC49B78F1C89E49200A98382 /* LaunchScreen.storyboard */,
@@ -89,6 +85,7 @@
 				DC5D49C21CA800410019F1A2 /* LineViewController.swift */,
 				DC5D49C41CA808090019F1A2 /* AnimationLineViewController.swift */,
 				DC5D49C61CA84ADD0019F1A2 /* ProgressLineViewController.swift */,
+				DCE025471CAAD15300FC07FB /* InteractionLineViewController.swift */,
 			);
 			path = Transit;
 			sourceTree = "<group>";
@@ -188,13 +185,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DC93099C1C8AFEE6000606C2 /* ModalViewController.swift in Sources */,
+				DCE025481CAAD15300FC07FB /* InteractionLineViewController.swift in Sources */,
 				DC5D49C51CA808090019F1A2 /* AnimationLineViewController.swift in Sources */,
 				DC93099F1C8B0116000606C2 /* SlideInZoomOutAnimation.swift in Sources */,
 				DC5D49C31CA800410019F1A2 /* LineViewController.swift in Sources */,
 				DCEC2DD91C95965800DF781B /* SlideInZoomOutInteraction.swift in Sources */,
 				DC49B79C1C89EC8100A98382 /* Train.swift in Sources */,
-				DC49B7891C89E49200A98382 /* ViewController.swift in Sources */,
 				DC49B79E1C89ED5600A98382 /* Passenger.swift in Sources */,
 				DC5D49C71CA84ADD0019F1A2 /* ProgressLineViewController.swift in Sources */,
 				DCCEBA011C94209600CA1D3C /* SlideInZoomOutProgress.swift in Sources */,

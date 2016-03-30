@@ -14,22 +14,29 @@ struct SlideInZoomOutProgress: ProgressLine {
         return 0.5
     }
     
+    func beforeDepart(fromView: UIView, toView: UIView, inView: UIView, direction: Direction) {
+        if direction == .Return {
+            toView.transform = CGAffineTransformMakeScale(0.9, 0.9)
+        }
+    }
+    
+    func afterArrived(fromView: UIView, toView: UIView, inView: UIView, direction: Direction) {
+        if direction == .Go {
+            fromView.transform = CGAffineTransformIdentity
+        }
+    }
+    
     func progress(fromView: UIView, toView: UIView, inView: UIView, direction: Direction, progress: CGFloat) {
         if direction == .Go {
             let scale = 1 - (0.1 * progress)
             let x = inView.frame.width - inView.frame.width * progress
+            fromView.alpha = 1 - (progress * 0.5)
             fromView.transform = CGAffineTransformMakeScale(scale, scale)
             toView.frame = CGRectMake(x, 0, toView.frame.size.width, toView.frame.size.height)
-            
-            if progress == 1 {
-                fromView.transform = CGAffineTransformIdentity
-            }
         } else {
-            if progress == 0 {
-                toView.transform = CGAffineTransformMakeScale(0.9, 0.9)
-            }
             let scale = 0.9 + (0.1 * progress)
             let x = inView.frame.width * progress
+            toView.alpha = 0.5 + (progress * 0.5)
             toView.transform = CGAffineTransformMakeScale(scale, scale)
             fromView.frame = CGRectMake(x, 0, fromView.frame.size.width, fromView.frame.size.height)
         }

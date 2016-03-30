@@ -22,6 +22,34 @@ class LineViewController: UITableViewController {
             travelPushBy(SlideInZoomOutProgress(), to: progressVC!)
         }
     }
+    
+    private var transit: Transit?
+    private var panStart: CGFloat = 0
+    
+    @IBAction func handlePan(sender: UIPanGestureRecognizer) {
+        let view = sender.view!
+        let location = sender.locationInView(view.window)
+        let velocity = sender.velocityInView(view)
+        
+        if sender.state == .Began {
+            selectedIndexPath = NSIndexPath(forRow: 2, inSection: 0)
+            panStart = location.x
+            let interactionVC = storyboard?.instantiateViewControllerWithIdentifier("InteractionVC")
+            transit = travelPushBy(SlideInZoomOutInteraction(),
+                to: interactionVC!, normalLine: SlideInZoomOutProgress())
+        } else if sender.state == .Changed {
+            let percentage = (location.x - panStart) / CGRectGetWidth(view.bounds)
+            transit?.updateInteractLine(percentage)
+        } else if sender.state == .Ended {
+            if velocity.x > 100 {
+                transit?.finishInteractionLine()
+            } else {
+                transit?.cancelInteractionLine()
+            }
+        }
+
+    }
+    
 }
 
 extension LineViewController: StationPassenger {
