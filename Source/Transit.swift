@@ -150,10 +150,12 @@ extension Transit {
             
             let currentView = passenger.view
             let targetView = p.view
-            let animateView = currentView.snapshotViewAfterScreenUpdates(false)
+            let animateView = currentView.copyView()
             let currentFrame = currentView.superview!.convertRect(currentView.frame, toView: nil)
             let targetFrame = targetView.superview!.convertRect(targetView.frame, toView: nil)
             
+            animateView.removeConstraints(animateView.constraints)
+            animateView.translatesAutoresizingMaskIntoConstraints = true
             animateView.frame = currentFrame
             inView.addSubview(animateView)
             
@@ -314,7 +316,9 @@ extension Transit {
             let startFrame = CGRectOffset(currentFrame, 0, context.fromOffset)
             
             if animateView == nil {
-                animateView = currentView.snapshotViewAfterScreenUpdates(false)
+                animateView = currentView.copyView()
+                animateView?.removeConstraints(animateView!.constraints)
+                animateView?.translatesAutoresizingMaskIntoConstraints = true
                 animateView?.frame = startFrame
                 animateView?.tag = viewTagOffset + index
                 context.container.addSubview(animateView!)
@@ -422,4 +426,13 @@ private func after(delay: Double, run:() -> ()) {
     dispatch_after(
         dispatch_time(DISPATCH_TIME_NOW, Int64(delay * Double(NSEC_PER_SEC))),
         dispatch_get_main_queue(), run)
+}
+
+private extension UIView {
+    func copyView() -> UIView {
+        if let s = self as? UIImageView {
+            s.highlighted = false
+        }
+        return NSKeyedUnarchiver.unarchiveObjectWithData(NSKeyedArchiver.archivedDataWithRootObject(self)) as! UIView
+    }
 }
