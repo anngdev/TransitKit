@@ -1,3 +1,5 @@
+<p align="center"><img src="https://raw.githubusercontent.com/zoonooz/Transit/master/Transit.jpg"/></p>
+
 # 🚃 Transit
 
 **Transit** is the library provide you an easiest way to customize the animation when you change from one ViewController to another. You can think of this library as transit system, passengers travel from one station to other station with trains in various lines.
