@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Transit
 
 struct SlideInZoomOutAnimation: AnimationLine {
     

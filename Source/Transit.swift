@@ -8,7 +8,7 @@
 
 import UIKit
 
-enum Direction {
+public enum Direction {
     case Go, Return
 }
 
@@ -123,7 +123,7 @@ extension Transit: UIViewControllerAnimatedTransitioning {
 
 extension Transit {
     
-    func animate(line: AnimationLine, direction: Direction, toStation: Station,
+    private func animate(line: AnimationLine, direction: Direction, toStation: Station,
         fromView: UIView, toView: UIView, inView: UIView, context: UIViewControllerContextTransitioning)
     {
         // passengers
@@ -140,7 +140,7 @@ extension Transit {
         }
     }
     
-    func animatePassenger(passengers: [Passenger], toStation: StationPassenger, byLine: AnimationLine,
+    private func animatePassenger(passengers: [Passenger], toStation: StationPassenger, byLine: AnimationLine,
         fromView: UIView, toView: UIView, inView: UIView)
     {
         for passenger in passengers {
@@ -181,7 +181,7 @@ extension Transit {
 
 extension Transit {
     
-    func progress(line: ProgressLine, direction: Direction, toStation: Station,
+    private func progress(line: ProgressLine, direction: Direction, toStation: Station,
         fromView: UIView, toView: UIView, inView: UIView, context: UIViewControllerContextTransitioning)
     {
         tempContext = ContextObjects(context: context)

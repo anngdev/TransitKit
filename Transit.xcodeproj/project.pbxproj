@@ -11,22 +11,49 @@
 		DC49B78C1C89E49200A98382 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC49B78A1C89E49200A98382 /* Main.storyboard */; };
 		DC49B78E1C89E49200A98382 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC49B78D1C89E49200A98382 /* Assets.xcassets */; };
 		DC49B7911C89E49200A98382 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC49B78F1C89E49200A98382 /* LaunchScreen.storyboard */; };
-		DC49B79A1C89E55300A98382 /* Station.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC49B7991C89E55300A98382 /* Station.swift */; };
-		DC49B79C1C89EC8100A98382 /* Train.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC49B79B1C89EC8100A98382 /* Train.swift */; };
-		DC49B79E1C89ED5600A98382 /* Passenger.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC49B79D1C89ED5600A98382 /* Passenger.swift */; };
-		DC49B7A01C8A01A400A98382 /* Transit.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC49B79F1C8A01A400A98382 /* Transit.swift */; };
 		DC5D49C31CA800410019F1A2 /* LineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5D49C21CA800410019F1A2 /* LineViewController.swift */; };
 		DC5D49C51CA808090019F1A2 /* AnimationLineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5D49C41CA808090019F1A2 /* AnimationLineViewController.swift */; };
 		DC5D49C71CA84ADD0019F1A2 /* ProgressLineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5D49C61CA84ADD0019F1A2 /* ProgressLineViewController.swift */; };
-		DC8889651C8ADFAD00C0A358 /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8889641C8ADFAD00C0A358 /* Line.swift */; };
-		DC93099F1C8B0116000606C2 /* SlideInZoomOutAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC93099E1C8B0116000606C2 /* SlideInZoomOutAnimation.swift */; };
-		DCCEBA011C94209600CA1D3C /* SlideInZoomOutProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCCEBA001C94209600CA1D3C /* SlideInZoomOutProgress.swift */; };
+		DCDBFE341CB13A7C00D53C83 /* SlideInZoomOutAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDBFE311CB13A7C00D53C83 /* SlideInZoomOutAnimation.swift */; };
+		DCDBFE351CB13A7C00D53C83 /* SlideInZoomOutInteraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDBFE321CB13A7C00D53C83 /* SlideInZoomOutInteraction.swift */; };
+		DCDBFE361CB13A7C00D53C83 /* SlideInZoomOutProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDBFE331CB13A7C00D53C83 /* SlideInZoomOutProgress.swift */; };
+		DCDBFE4E1CB13DBD00D53C83 /* Transit.h in Headers */ = {isa = PBXBuildFile; fileRef = DCDBFE3E1CB13B6200D53C83 /* Transit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDBFE4F1CB141C200D53C83 /* Station.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC49B7991C89E55300A98382 /* Station.swift */; };
+		DCDBFE501CB141C200D53C83 /* Train.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC49B79B1C89EC8100A98382 /* Train.swift */; };
+		DCDBFE511CB141C200D53C83 /* Passenger.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC49B79D1C89ED5600A98382 /* Passenger.swift */; };
+		DCDBFE521CB141C200D53C83 /* Transit.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC49B79F1C8A01A400A98382 /* Transit.swift */; };
+		DCDBFE531CB141C200D53C83 /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8889641C8ADFAD00C0A358 /* Line.swift */; };
+		DCDBFE571CB1425800D53C83 /* Transit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCDBFE3C1CB13B6200D53C83 /* Transit.framework */; settings = {ATTRIBUTES = (Required, ); }; };
+		DCDBFE581CB1425800D53C83 /* Transit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DCDBFE3C1CB13B6200D53C83 /* Transit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DCE025481CAAD15300FC07FB /* InteractionLineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE025471CAAD15300FC07FB /* InteractionLineViewController.swift */; };
-		DCEC2DD91C95965800DF781B /* SlideInZoomOutInteraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEC2DD81C95965800DF781B /* SlideInZoomOutInteraction.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		DCDBFE551CB1424900D53C83 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DC49B77B1C89E49200A98382 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DCDBFE3B1CB13B6200D53C83;
+			remoteInfo = Transit;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		DCDBFE591CB1425800D53C83 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				DCDBFE581CB1425800D53C83 /* Transit.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
-		DC49B7831C89E49200A98382 /* Transit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Transit.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DC49B7831C89E49200A98382 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC49B7861C89E49200A98382 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DC49B78B1C89E49200A98382 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DC49B78D1C89E49200A98382 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -40,14 +67,25 @@
 		DC5D49C41CA808090019F1A2 /* AnimationLineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationLineViewController.swift; sourceTree = "<group>"; };
 		DC5D49C61CA84ADD0019F1A2 /* ProgressLineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressLineViewController.swift; sourceTree = "<group>"; };
 		DC8889641C8ADFAD00C0A358 /* Line.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Line.swift; sourceTree = "<group>"; };
-		DC93099E1C8B0116000606C2 /* SlideInZoomOutAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideInZoomOutAnimation.swift; sourceTree = "<group>"; };
-		DCCEBA001C94209600CA1D3C /* SlideInZoomOutProgress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideInZoomOutProgress.swift; sourceTree = "<group>"; };
+		DCDBFE311CB13A7C00D53C83 /* SlideInZoomOutAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideInZoomOutAnimation.swift; sourceTree = "<group>"; };
+		DCDBFE321CB13A7C00D53C83 /* SlideInZoomOutInteraction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideInZoomOutInteraction.swift; sourceTree = "<group>"; };
+		DCDBFE331CB13A7C00D53C83 /* SlideInZoomOutProgress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideInZoomOutProgress.swift; sourceTree = "<group>"; };
+		DCDBFE3C1CB13B6200D53C83 /* Transit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Transit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DCDBFE3E1CB13B6200D53C83 /* Transit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Transit.h; sourceTree = "<group>"; };
+		DCDBFE401CB13B6200D53C83 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DCE025471CAAD15300FC07FB /* InteractionLineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InteractionLineViewController.swift; sourceTree = "<group>"; };
-		DCEC2DD81C95965800DF781B /* SlideInZoomOutInteraction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideInZoomOutInteraction.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		DC49B7801C89E49200A98382 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DCDBFE571CB1425800D53C83 /* Transit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DCDBFE381CB13B6200D53C83 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -61,7 +99,8 @@
 			isa = PBXGroup;
 			children = (
 				DC49B7981C89E52800A98382 /* Source */,
-				DC49B7851C89E49200A98382 /* Transit */,
+				DC49B7851C89E49200A98382 /* Example */,
+				DCDBFE3D1CB13B6200D53C83 /* Transit */,
 				DC49B7841C89E49200A98382 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -69,14 +108,16 @@
 		DC49B7841C89E49200A98382 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				DC49B7831C89E49200A98382 /* Transit.app */,
+				DC49B7831C89E49200A98382 /* Example.app */,
+				DCDBFE3C1CB13B6200D53C83 /* Transit.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		DC49B7851C89E49200A98382 /* Transit */ = {
+		DC49B7851C89E49200A98382 /* Example */ = {
 			isa = PBXGroup;
 			children = (
+				DCDBFE301CB13A7C00D53C83 /* Lines */,
 				DC49B7861C89E49200A98382 /* AppDelegate.swift */,
 				DC49B78A1C89E49200A98382 /* Main.storyboard */,
 				DC49B78D1C89E49200A98382 /* Assets.xcassets */,
@@ -87,13 +128,12 @@
 				DC5D49C61CA84ADD0019F1A2 /* ProgressLineViewController.swift */,
 				DCE025471CAAD15300FC07FB /* InteractionLineViewController.swift */,
 			);
-			path = Transit;
+			path = Example;
 			sourceTree = "<group>";
 		};
 		DC49B7981C89E52800A98382 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				DC93099D1C8B004A000606C2 /* Lines */,
 				DC49B7991C89E55300A98382 /* Station.swift */,
 				DC49B79B1C89EC8100A98382 /* Train.swift */,
 				DC49B79D1C89ED5600A98382 /* Passenger.swift */,
@@ -103,26 +143,66 @@
 			path = Source;
 			sourceTree = "<group>";
 		};
-		DC93099D1C8B004A000606C2 /* Lines */ = {
+		DCDBFE301CB13A7C00D53C83 /* Lines */ = {
 			isa = PBXGroup;
 			children = (
-				DC93099E1C8B0116000606C2 /* SlideInZoomOutAnimation.swift */,
-				DCCEBA001C94209600CA1D3C /* SlideInZoomOutProgress.swift */,
-				DCEC2DD81C95965800DF781B /* SlideInZoomOutInteraction.swift */,
+				DCDBFE311CB13A7C00D53C83 /* SlideInZoomOutAnimation.swift */,
+				DCDBFE321CB13A7C00D53C83 /* SlideInZoomOutInteraction.swift */,
+				DCDBFE331CB13A7C00D53C83 /* SlideInZoomOutProgress.swift */,
 			);
 			path = Lines;
 			sourceTree = "<group>";
 		};
+		DCDBFE3D1CB13B6200D53C83 /* Transit */ = {
+			isa = PBXGroup;
+			children = (
+				DCDBFE3E1CB13B6200D53C83 /* Transit.h */,
+				DCDBFE401CB13B6200D53C83 /* Info.plist */,
+			);
+			path = Transit;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		DCDBFE391CB13B6200D53C83 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DCDBFE4E1CB13DBD00D53C83 /* Transit.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
-		DC49B7821C89E49200A98382 /* Transit */ = {
+		DC49B7821C89E49200A98382 /* Example */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = DC49B7951C89E49200A98382 /* Build configuration list for PBXNativeTarget "Transit" */;
+			buildConfigurationList = DC49B7951C89E49200A98382 /* Build configuration list for PBXNativeTarget "Example" */;
 			buildPhases = (
 				DC49B77F1C89E49200A98382 /* Sources */,
 				DC49B7801C89E49200A98382 /* Frameworks */,
 				DC49B7811C89E49200A98382 /* Resources */,
+				DCDBFE591CB1425800D53C83 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DCDBFE561CB1424900D53C83 /* PBXTargetDependency */,
+			);
+			name = Example;
+			productName = Transit;
+			productReference = DC49B7831C89E49200A98382 /* Example.app */;
+			productType = "com.apple.product-type.application";
+		};
+		DCDBFE3B1CB13B6200D53C83 /* Transit */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DCDBFE451CB13B6200D53C83 /* Build configuration list for PBXNativeTarget "Transit" */;
+			buildPhases = (
+				DCDBFE371CB13B6200D53C83 /* Sources */,
+				DCDBFE381CB13B6200D53C83 /* Frameworks */,
+				DCDBFE391CB13B6200D53C83 /* Headers */,
+				DCDBFE3A1CB13B6200D53C83 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -130,8 +210,8 @@
 			);
 			name = Transit;
 			productName = Transit;
-			productReference = DC49B7831C89E49200A98382 /* Transit.app */;
-			productType = "com.apple.product-type.application";
+			productReference = DCDBFE3C1CB13B6200D53C83 /* Transit.framework */;
+			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
 
@@ -146,6 +226,9 @@
 					DC49B7821C89E49200A98382 = {
 						CreatedOnToolsVersion = 7.2.1;
 						DevelopmentTeam = N6V2CV23BU;
+					};
+					DCDBFE3B1CB13B6200D53C83 = {
+						CreatedOnToolsVersion = 7.3;
 					};
 				};
 			};
@@ -162,7 +245,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				DC49B7821C89E49200A98382 /* Transit */,
+				DCDBFE3B1CB13B6200D53C83 /* Transit */,
+				DC49B7821C89E49200A98382 /* Example */,
 			);
 		};
 /* End PBXProject section */
@@ -178,6 +262,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		DCDBFE3A1CB13B6200D53C83 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -186,22 +277,37 @@
 			buildActionMask = 2147483647;
 			files = (
 				DCE025481CAAD15300FC07FB /* InteractionLineViewController.swift in Sources */,
+				DCDBFE361CB13A7C00D53C83 /* SlideInZoomOutProgress.swift in Sources */,
 				DC5D49C51CA808090019F1A2 /* AnimationLineViewController.swift in Sources */,
-				DC93099F1C8B0116000606C2 /* SlideInZoomOutAnimation.swift in Sources */,
 				DC5D49C31CA800410019F1A2 /* LineViewController.swift in Sources */,
-				DCEC2DD91C95965800DF781B /* SlideInZoomOutInteraction.swift in Sources */,
-				DC49B79C1C89EC8100A98382 /* Train.swift in Sources */,
-				DC49B79E1C89ED5600A98382 /* Passenger.swift in Sources */,
 				DC5D49C71CA84ADD0019F1A2 /* ProgressLineViewController.swift in Sources */,
-				DCCEBA011C94209600CA1D3C /* SlideInZoomOutProgress.swift in Sources */,
-				DC49B7A01C8A01A400A98382 /* Transit.swift in Sources */,
-				DC49B79A1C89E55300A98382 /* Station.swift in Sources */,
-				DC8889651C8ADFAD00C0A358 /* Line.swift in Sources */,
+				DCDBFE341CB13A7C00D53C83 /* SlideInZoomOutAnimation.swift in Sources */,
+				DCDBFE351CB13A7C00D53C83 /* SlideInZoomOutInteraction.swift in Sources */,
 				DC49B7871C89E49200A98382 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		DCDBFE371CB13B6200D53C83 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DCDBFE4F1CB141C200D53C83 /* Station.swift in Sources */,
+				DCDBFE501CB141C200D53C83 /* Train.swift in Sources */,
+				DCDBFE511CB141C200D53C83 /* Passenger.swift in Sources */,
+				DCDBFE521CB141C200D53C83 /* Transit.swift in Sources */,
+				DCDBFE531CB141C200D53C83 /* Line.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		DCDBFE561CB1424900D53C83 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DCDBFE3B1CB13B6200D53C83 /* Transit */;
+			targetProxy = DCDBFE551CB1424900D53C83 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		DC49B78A1C89E49200A98382 /* Main.storyboard */ = {
@@ -312,10 +418,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				INFOPLIST_FILE = Transit/Info.plist;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				INFOPLIST_FILE = Example/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.zoonref.Transit;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zoonref.TransitExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -327,12 +434,61 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				INFOPLIST_FILE = Transit/Info.plist;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				INFOPLIST_FILE = Example/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.zoonref.Transit;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zoonref.TransitExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+			};
+			name = Release;
+		};
+		DCDBFE461CB13B6200D53C83 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = Transit/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.zoonref.Transit;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		DCDBFE471CB13B6200D53C83 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = Transit/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.zoonref.Transit;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
@@ -348,11 +504,20 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		DC49B7951C89E49200A98382 /* Build configuration list for PBXNativeTarget "Transit" */ = {
+		DC49B7951C89E49200A98382 /* Build configuration list for PBXNativeTarget "Example" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DC49B7961C89E49200A98382 /* Debug */,
 				DC49B7971C89E49200A98382 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DCDBFE451CB13B6200D53C83 /* Build configuration list for PBXNativeTarget "Transit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DCDBFE461CB13B6200D53C83 /* Debug */,
+				DCDBFE471CB13B6200D53C83 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

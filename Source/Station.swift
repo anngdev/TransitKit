@@ -9,13 +9,13 @@
 import UIKit
 import ObjectiveC
 
-typealias Station = UIViewController
+public typealias Station = UIViewController
 
 private struct AssociatedKeys {
     static var transitKey = "transit"
 }
 
-extension UIViewController {
+public extension UIViewController {
     
     /**
      Create transit object and use manually
@@ -24,7 +24,7 @@ extension UIViewController {
      
      - returns: Transit object that just created
      */
-    func transitBy(line: Line) -> Transit {
+    public func transitBy(line: Line) -> Transit {
         let transit = Transit(line: line)
         objc_setAssociatedObject(self, &AssociatedKeys.transitKey, transit, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         return transit
@@ -38,7 +38,7 @@ extension UIViewController {
      
      - returns: Transit object that just created
      */
-    func travelBy(line: Line, to: Station) -> Transit {
+    public func travelBy(line: Line, to: Station) -> Transit {
         let transit = transitBy(line)
         to.transitioningDelegate = transit
         presentViewController(to, animated: true, completion: nil)
@@ -52,7 +52,7 @@ extension UIViewController {
      
      - returns: Transit object that just created
      */
-    func travelBackBy(line: Line) -> Transit {
+    public func travelBackBy(line: Line) -> Transit {
         let transit = transitBy(line)
         transitioningDelegate = transit
         dismissViewControllerAnimated(true, completion: nil)
@@ -67,7 +67,7 @@ extension UIViewController {
      
      - returns: Transit object that just created
      */
-    func travelPushBy(line: Line, to: Station) -> Transit {
+    public func travelPushBy(line: Line, to: Station) -> Transit {
         assert(!(line is InteractionLine), "please use another method for interaction line")
         let transit = transitBy(line)
         navigationController?.delegate = transit
@@ -84,7 +84,7 @@ extension UIViewController {
      
      - returns: Transit object that just created
      */
-    func travelPushBy(line: InteractionLine, to: Station, normalLine: Line) -> Transit {
+    public func travelPushBy(line: InteractionLine, to: Station, normalLine: Line) -> Transit {
         assert(!(normalLine is InteractionLine), "normalLine cannot be interaction line")
         let transit = Transit(line: line)
         navigationController?.delegate = transit
@@ -100,7 +100,7 @@ extension UIViewController {
      
      - returns: Transit object that just created
      */
-    func travelPopBy(line: InteractionLine) -> Transit {
+    public func travelPopBy(line: InteractionLine) -> Transit {
         let transit = Transit(line: line)
         let oldDelegate = navigationController?.delegate
         navigationController?.delegate = transit
@@ -115,7 +115,7 @@ extension UIViewController {
 /**
  *  Implement this protocol to animate with subview passenger
  */
-protocol StationPassenger {
+public protocol StationPassenger {
     
     /**
      All passengers with it's subview and name for this view controller
@@ -125,8 +125,8 @@ protocol StationPassenger {
     func allPassengers() -> [Passenger]
 }
 
-extension StationPassenger {
-    func passengerByName(name: String) -> Passenger? {
+public extension StationPassenger {
+    public func passengerByName(name: String) -> Passenger? {
         return allPassengers().filter{ $0.name == name }.first
     }
 }

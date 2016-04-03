@@ -1,6 +1,8 @@
 <p align="center"><img src="https://raw.githubusercontent.com/zoonooz/Transit/master/Transit.jpg"/></p>
 
 # 🚃 Transit
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+
 
 **Transit** is the library provide you an easiest way to customize the animation when you change from one ViewController to another. You can think of this library as transit system, passengers travel from one station to other station with trains in various lines.
 
@@ -36,6 +38,11 @@ Line is the most important part here to create the animation. There are tree bas
 - **InteractionLine** for interaction transition.
 
 ## How to use
+--
 ## Installation
+#### Carthage
+```
+github "zoonooz/Transit"
+```
 ## Author
 Amornchai Kanokpullwad, [@zoonref](https://twitter.com/zoonref)

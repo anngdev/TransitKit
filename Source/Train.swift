@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Train {
+public struct Train {
     
     var fromStation: Station
     var toStation: Station

@@ -11,7 +11,7 @@ import UIKit
 /**
  *  Base protocol line for all type of animation transition
  */
-protocol Line {
+public protocol Line {
     
     /**
      Duration of the animation transition
@@ -34,7 +34,7 @@ protocol Line {
 /**
  *  Protocol for transition that use `UIView` animation block
  */
-protocol AnimationLine: Line {
+public protocol AnimationLine: Line {
     
     /**
      This function will be called to animate views for transition
@@ -59,7 +59,7 @@ protocol AnimationLine: Line {
 /**
  *  Protocol for transition that use `CADisplayLink` to animate
  */
-protocol ProgressLine: Line {
+public protocol ProgressLine: Line {
     
     /**
      This function will be called to animate views for transition
@@ -87,7 +87,7 @@ protocol ProgressLine: Line {
 /**
  *  Protocol for interactive transition
  */
-protocol InteractionLine: ProgressLine {
+public protocol InteractionLine: ProgressLine {
     
     /**
      This function will be called if interactive end and needs to animate to finish the transition

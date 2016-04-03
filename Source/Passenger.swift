@@ -8,7 +8,12 @@
 
 import UIKit
 
-struct Passenger {
+public struct Passenger {
     var name: String
     var view: UIView
+    
+    public init(name: String, view: UIView) {
+        self.name = name
+        self.view = view
+    }
 }
