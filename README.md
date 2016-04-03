@@ -4,7 +4,9 @@
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
 
-**Transit** is the library provide you an easiest way to customize the animation when you change from one ViewController to another. You can think of this library as transit system, passengers travel from one station to other station with trains in various lines.
+**Transit** is the library provide you an easiest way to customize the animation when you change from one ViewController to another. You can think of this library as transit system, travel from one station to other station with trains in various lines.
+
+Besides custom transition, Transit also helps you move subviews to the next ViewController with your custom animation.
 
 Transit consists of four parts
 - **Station** is each view controller you animating to or from
@@ -32,7 +34,7 @@ struct Passenger {
 Train knows which station they coming from and going to including the passengers on board. You will not use the train directly because the station will create the train for you.
 
 ## 🚦 Line (線)
-Line is the most important part here to create the animation. There are tree base lines for you to use.
+Line is the most important part here to create the animation. There are three Line protocols for you to use.
 - **AnimationLine** normal line for `UIView` animation based
 - **ProgressLine** use `CADisplayLink` for animation
 - **InteractionLine** for interaction transition.
@@ -43,7 +45,7 @@ Line is the most important part here to create the animation. There are tree bas
 3. Travel!
 
 #### Example
-You can see example of Line implementation in example project and use travel methods to start the animation.
+You can see example of Line implementation in example project and use travel methods to start the transition.
 ```
 let vc = storyboard?.instantiateViewControllerWithIdentifier("vc")
 travelBy(SlideInZoomOutAnimation(), to: vc!)
