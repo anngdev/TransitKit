@@ -38,7 +38,17 @@ Line is the most important part here to create the animation. There are tree bas
 - **InteractionLine** for interaction transition.
 
 ## How to use
---
+1. Choose the animation type you want.
+2. Implement the Line protocol.
+3. Travel!
+
+#### Example
+You can see example of Line implementation in example project and use travel methods to start the animation.
+```
+let vc = storyboard?.instantiateViewControllerWithIdentifier("vc")
+travelBy(SlideInZoomOutAnimation(), to: vc!)
+```
+
 ## Installation
 #### Carthage
 ```
