@@ -50,22 +50,22 @@ There are three functions in every line you have to implement
 - `func beforeDepart(fromView:toView:inView:direction:)` run before animation start
 - `func afterArrived(fromView:toView:inView:direction:)` run after animation finished
 
-`fromView` is current ViewController's view
-`toView` is ViewController's view that going to appear
-`inView` is container view that has `fromView` and `toView` animating inside
-`direction` can be `.Go` for show modal or push and `.Return` for dismissal or pop
+`fromView` is current ViewController's view<br/>
+`toView` is ViewController's view that going to appear<br/>
+`inView` is container view that has `fromView` and `toView` animating inside<br/>
+`direction` can be `.Go` for show modal or push and `.Return` for dismissal or pop<br/>
 
-###### Animation Line
+##### Animation Line
 Basically animation line do nothing but expect you to create animation in these functions
 - `func animate(fromView:toView:inView:direction:)` create transition animation block here
 - `func animatePassenger(view:targetFrame:direction:)` create animation block for each subview
 
-###### Progress Line
+##### Progress Line
 Progress line use `CADisplayLink` to manage the animation frame and pass the progress value to these functions
 - `func progress(fromView:toView:inView:direction:progress:)`
 - `func progressPassenger(view:fromFrame:toFrame:direction:progress:)`
 
-###### Interaction Line
+##### Interaction Line
 For Interaction line, you have to manage the progress by yourself and pass the value back to Transit through these functions
 - `func updateInteractLine(percentComplete:)`
 - `func finishInteractionLine(withVelocity:)`
