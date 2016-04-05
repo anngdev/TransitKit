@@ -39,6 +39,10 @@ Line is the most important part here to create the animation. There are three Li
 - **ProgressLine** use `CADisplayLink` for animation
 - **InteractionLine** for interaction transition.
 
+AnimationLine | ProgressLine | InteractionLine
+---| --- | ---
+![](https://raw.githubusercontent.com/zoonooz/Transit/master/line_animation.gif) | ![](https://raw.githubusercontent.com/zoonooz/Transit/master/line_progress.gif) | ![](https://raw.githubusercontent.com/zoonooz/Transit/master/line_interaction.gif)
+
 ## How to use
 1. Choose the animation type you want.
 2. Implement the Line protocol.
