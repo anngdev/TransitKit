@@ -70,6 +70,7 @@ For Interaction line, you have to manage the progress by yourself and pass the v
 - `func updateInteractLine(percentComplete:)`
 - `func finishInteractionLine(withVelocity:)`
 - `func cancelInteractionLine(withVelocity:)`
+
 and Transit will call these functions in your implementation
 - `func progress(fromView:toView:inView:direction:progress:)`
 - `func progressPassenger(view:fromFrame:toFrame:direction:progress:)`
@@ -90,6 +91,7 @@ For NavigationController use
 - `func travelPushBy(line: Line, to: Station) -> Transit`
 - `func travelPushBy(line: InteractionLine, to: Station, normalLine: Line) -> Transit`
 - `func travelPopBy(line: InteractionLine) -> Transit`
+
 As NavigationController can pop with or without interaction. If you use InteractionLine, you have to provide the AnimationLine or ProgressLine for default pop animation.
 
 #### Example
