@@ -58,7 +58,11 @@ extension LineViewController: StationPassenger {
     func allPassengers() -> [Passenger] {
         if let indexPath = selectedIndexPath {
             let view = tableView.cellForRowAtIndexPath(indexPath)!.viewWithTag(1)!
-            return [Passenger(name: "icon", view: view)]
+            let text = tableView.cellForRowAtIndexPath(indexPath)!.viewWithTag(2)!
+            return [
+                Passenger(name: "icon", view: view),
+                Passenger(name: "text", view: text)
+            ]
         }
         return []
     }

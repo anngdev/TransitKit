@@ -25,7 +25,7 @@
         <!--Transit-->
         <scene sceneID="kgQ-gO-woJ">
             <objects>
-                <tableViewController id="VHc-ex-3WG" customClass="LineViewController" customModule="Transit" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="VHc-ex-3WG" customClass="LineViewController" customModule="Example" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="TSC-M5-9Qs">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -44,8 +44,8 @@
                                                 <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon" translatesAutoresizingMaskIntoConstraints="NO" id="Zxl-fz-yRJ">
                                                     <rect key="frame" x="8" y="10" width="40" height="40"/>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Animation Line" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ruZ-Vw-vfG">
-                                                    <rect key="frame" x="56" y="19" width="201" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Animation Line" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ruZ-Vw-vfG">
+                                                    <rect key="frame" x="56" y="19" width="113" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
@@ -68,8 +68,8 @@
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Progress Line" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s4f-Ck-AB2">
-                                                    <rect key="frame" x="56" y="19" width="201" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Progress Line" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s4f-Ck-AB2">
+                                                    <rect key="frame" x="56" y="19" width="105" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
@@ -92,8 +92,8 @@
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Interaction Line" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vGo-RS-GEt">
-                                                    <rect key="frame" x="56" y="19" width="201" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Interaction Line" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vGo-RS-GEt">
+                                                    <rect key="frame" x="56" y="19" width="119" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
@@ -132,7 +132,7 @@
         <!--Animation Line-->
         <scene sceneID="mtE-Q9-4WY">
             <objects>
-                <tableViewController storyboardIdentifier="AnimationVC" id="xpC-FY-CY0" customClass="AnimationLineViewController" customModule="Transit" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="AnimationVC" id="xpC-FY-CY0" customClass="AnimationLineViewController" customModule="Example" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="175" sectionHeaderHeight="28" sectionFooterHeight="28" id="tbp-59-0vI">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -161,6 +161,27 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="50" id="fur-P1-MpP">
+                                        <rect key="frame" x="0.0" y="239" width="600" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fur-P1-MpP" id="iHg-O7-OVj">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="49.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Animation Line" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vFk-Me-pmk">
+                                                    <rect key="frame" x="8" y="14" width="584" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="vFk-Me-pmk" firstAttribute="trailing" secondItem="iHg-O7-OVj" secondAttribute="trailingMargin" id="Aiw-J7-Cm4"/>
+                                                <constraint firstItem="vFk-Me-pmk" firstAttribute="leading" secondItem="iHg-O7-OVj" secondAttribute="leadingMargin" id="GRh-1e-xaX"/>
+                                                <constraint firstItem="vFk-Me-pmk" firstAttribute="centerY" secondItem="iHg-O7-OVj" secondAttribute="centerY" id="rza-G1-gu6"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -178,7 +199,7 @@
         <!--Progress Line-->
         <scene sceneID="1zF-TF-PoT">
             <objects>
-                <tableViewController storyboardIdentifier="ProgressVC" id="Kg7-pV-uG8" customClass="ProgressLineViewController" customModule="Transit" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="ProgressVC" id="Kg7-pV-uG8" customClass="ProgressLineViewController" customModule="Example" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="175" sectionHeaderHeight="28" sectionFooterHeight="28" id="nft-bk-v8F">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -212,6 +233,27 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="50" id="BoJ-ZN-ZCX">
+                                        <rect key="frame" x="0.0" y="239" width="600" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="BoJ-ZN-ZCX" id="s6Y-Qt-y4f">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="49.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Progress Line" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yzO-I7-EFh">
+                                                    <rect key="frame" x="8" y="14" width="584" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="yzO-I7-EFh" firstAttribute="trailing" secondItem="s6Y-Qt-y4f" secondAttribute="trailingMargin" id="8by-gg-OXx"/>
+                                                <constraint firstItem="yzO-I7-EFh" firstAttribute="leading" secondItem="s6Y-Qt-y4f" secondAttribute="leadingMargin" id="L90-rT-3vS"/>
+                                                <constraint firstItem="yzO-I7-EFh" firstAttribute="centerY" secondItem="s6Y-Qt-y4f" secondAttribute="centerY" id="qek-1u-XG1"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -229,7 +271,7 @@
         <!--Interaction Line-->
         <scene sceneID="Axq-9k-FtT">
             <objects>
-                <tableViewController storyboardIdentifier="InteractionVC" id="iKr-Eh-uLW" customClass="InteractionLineViewController" customModule="Transit" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="InteractionVC" id="iKr-Eh-uLW" customClass="InteractionLineViewController" customModule="Example" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="175" sectionHeaderHeight="28" sectionFooterHeight="28" id="UTc-o5-6Jd">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -260,6 +302,27 @@
                                             <constraints>
                                                 <constraint firstItem="6yt-ci-kEP" firstAttribute="top" secondItem="0h6-kJ-ehR" secondAttribute="topMargin" constant="16" id="jIC-hR-tdz"/>
                                                 <constraint firstItem="6yt-ci-kEP" firstAttribute="centerX" secondItem="0h6-kJ-ehR" secondAttribute="centerX" id="wLw-Ck-C3a"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="50" id="PuA-7N-TY7">
+                                        <rect key="frame" x="0.0" y="239" width="600" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PuA-7N-TY7" id="MWA-eD-Lqb">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="49.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Interaction Line" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UFi-Pd-YSp">
+                                                    <rect key="frame" x="8" y="14" width="584" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="UFi-Pd-YSp" firstAttribute="centerY" secondItem="MWA-eD-Lqb" secondAttribute="centerY" id="AoL-6m-LQP"/>
+                                                <constraint firstItem="UFi-Pd-YSp" firstAttribute="trailing" secondItem="MWA-eD-Lqb" secondAttribute="trailingMargin" id="TwQ-A6-3p9"/>
+                                                <constraint firstItem="UFi-Pd-YSp" firstAttribute="leading" secondItem="MWA-eD-Lqb" secondAttribute="leadingMargin" id="X05-Na-69E"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>

@@ -44,6 +44,10 @@ extension InteractionLineViewController: StationPassenger {
     
     func allPassengers() -> [Passenger] {
         let view = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0))!.viewWithTag(1)!
-        return [Passenger(name: "icon", view: view)]
+        let text = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 1, inSection: 0))!.viewWithTag(1)!
+        return [
+            Passenger(name: "icon", view: view),
+            Passenger(name: "text", view: text)
+        ]
     }
 }
