@@ -44,9 +44,53 @@ AnimationLine | ProgressLine | InteractionLine
 ![](https://raw.githubusercontent.com/zoonooz/Transit/master/line_animation.gif) | ![](https://raw.githubusercontent.com/zoonooz/Transit/master/line_progress.gif) | ![](https://raw.githubusercontent.com/zoonooz/Transit/master/line_interaction.gif)
 
 ## How to use
-1. Choose the animation type you want.
-2. Implement the Line protocol.
-3. Travel!
+#### 1. Implement Line protocol
+There are three functions in every line you have to implement
+- `func duration() -> NSTimeInterval` animation duration
+- `func beforeDepart(fromView:toView:inView:direction:)` run before animation start
+- `func afterArrived(fromView:toView:inView:direction:)` run after animation finished
+
+`fromView` is current ViewController's view
+`toView` is ViewController's view that going to appear
+`inView` is container view that has `fromView` and `toView` animating inside
+`direction` can be `.Go` for show modal or push and `.Return` for dismissal or pop
+
+###### Animation Line
+Basically animation line do nothing but expect you to create animation in these functions
+- `func animate(fromView:toView:inView:direction:)` create transition animation block here
+- `func animatePassenger(view:targetFrame:direction:)` create animation block for each subview
+
+###### Progress Line
+Progress line use `CADisplayLink` to manage the animation frame and pass the progress value to these functions
+- `func progress(fromView:toView:inView:direction:progress:)`
+- `func progressPassenger(view:fromFrame:toFrame:direction:progress:)`
+
+###### Interaction Line
+For Interaction line, you have to manage the progress by yourself and pass the value back to Transit through these functions
+- `func updateInteractLine(percentComplete:)`
+- `func finishInteractionLine(withVelocity:)`
+- `func cancelInteractionLine(withVelocity:)`
+and Transit will call these functions in your implementation
+- `func progress(fromView:toView:inView:direction:progress:)`
+- `func progressPassenger(view:fromFrame:toFrame:direction:progress:)`
+- `func interactFinish(fromView:toView:inView:direction:lastProgress:velocity:) -> NSTimeInterval`
+- `func interactCancel(fromView:toView:inView:direction:lastProgress:velocity:) -> NSTimeInterval`
+- `func interactPassengerFinish(view:toFrame:duration:)`
+- `func interactPassengerCancel(view:toFrame:duration:)`
+
+See [this](https://github.com/zoonooz/Transit/tree/master/Example/Lines) for example of implementation
+
+#### 2. Travel!
+
+For modal use
+- `func travelBy(line: Line, to: Station) -> Transit`
+- `func travelBackBy(line: Line) -> Transit`
+
+For NavigationController use
+- `func travelPushBy(line: Line, to: Station) -> Transit`
+- `func travelPushBy(line: InteractionLine, to: Station, normalLine: Line) -> Transit`
+- `func travelPopBy(line: InteractionLine) -> Transit`
+As NavigationController can pop with or without interaction. If you use InteractionLine, you have to provide the AnimationLine or ProgressLine for default pop animation.
 
 #### Example
 You can see example of Line implementation in example project and use travel methods to start the transition.
