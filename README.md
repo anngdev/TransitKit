@@ -1,10 +1,10 @@
-<p align="center"><img src="https://raw.githubusercontent.com/zoonooz/Transit/master/Transit.jpg"/></p>
+<p align="center"><img src="https://raw.githubusercontent.com/zoonooz/TransitKit/master/TransitKit.jpg"/></p>
 
-# 🚃 Transit
+# 🚃 TransitKit
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
 
-**Transit** is the library provide you an easiest way to customize the animation when you change from one ViewController to another. You can think of this library as transit system, travel from one station to other station with trains in various lines.
+**TransitKit** is the library provide you an easiest way to customize the animation when you change from one ViewController to another. You can think of this library as transit system, travel from one station to other station with trains in various lines.
 
 Besides custom transition, Transit also helps you move subviews to the next ViewController with your custom animation.
 
@@ -41,7 +41,7 @@ Line is the most important part here to create the animation. There are three Li
 
 AnimationLine | ProgressLine | InteractionLine
 ---| --- | ---
-![](https://raw.githubusercontent.com/zoonooz/Transit/master/line_animation.gif) | ![](https://raw.githubusercontent.com/zoonooz/Transit/master/line_progress.gif) | ![](https://raw.githubusercontent.com/zoonooz/Transit/master/line_interaction.gif)
+![](https://raw.githubusercontent.com/zoonooz/TransitKit/master/line_animation.gif) | ![](https://raw.githubusercontent.com/zoonooz/TransitKit/master/line_progress.gif) | ![](https://raw.githubusercontent.com/zoonooz/TransitKit/master/line_interaction.gif)
 
 ## How to use
 #### 1. Implement Line protocol
@@ -79,7 +79,7 @@ and Transit will call these functions in your implementation
 - `func interactPassengerFinish(view:toFrame:duration:)`
 - `func interactPassengerCancel(view:toFrame:duration:)`
 
-See [this](https://github.com/zoonooz/Transit/tree/master/Example/Lines) for example of implementation
+See [this](https://github.com/zoonooz/TransitKit/tree/master/Example/Lines) for example of implementation
 
 #### 2. Travel!
 
@@ -104,7 +104,7 @@ travelBy(SlideInZoomOutAnimation(), to: vc!)
 ## Installation
 #### Carthage
 ```
-github "zoonooz/Transit"
+github "zoonooz/TransitKit"
 ```
 ## Author
 Amornchai Kanokpullwad, [@zoonref](https://twitter.com/zoonref)
