@@ -81,7 +81,14 @@ and Transit will call these functions in your implementation
 
 See [this](https://github.com/zoonooz/TransitKit/tree/master/Example/Lines) for example of implementation
 
-#### 2. Travel!
+#### 2. Passengers
+If you want to animate subviews with the transition, both ViewControllers have to extends `StationPassenger` and return all the Passengers with the same name.
+```
+public protocol StationPassenger {
+    func allPassengers() -> [Passenger]
+}
+```
+#### 3. Travel!
 
 For modal use
 - `func travelBy(line: Line, to: Station) -> Transit`
